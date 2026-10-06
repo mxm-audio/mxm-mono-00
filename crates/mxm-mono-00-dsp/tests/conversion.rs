@@ -346,11 +346,16 @@ fn every_converted_patch_renders_the_sound_it_was_pinned_at() {
             c.name,
             c.peak
         );
-        assert_eq!(
-            got, c.digest,
-            "{}: digest {got:016x}, pinned {:016x}",
-            c.name, c.digest
-        );
+        // The pinned digests are Windows': each platform's maths library rounds in its own way, so
+        // Linux and macOS render other bits (the owner, 2026-10-06: pin on Windows only). The peak
+        // above, compared within a tolerance, holds everywhere.
+        if cfg!(target_os = "windows") {
+            assert_eq!(
+                got, c.digest,
+                "{}: digest {got:016x}, pinned {:016x}",
+                c.name, c.digest
+            );
+        }
     }
 }
 

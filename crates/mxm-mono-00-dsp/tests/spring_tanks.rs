@@ -59,11 +59,15 @@ fn the_medium_tank_is_the_tank_the_instrument_had() {
         SpringTankModel::Medium,
         "a fresh reverb is the measured tank, which is the only one the instrument can have"
     );
-    assert_eq!(
-        digest(&render(&mut reverb)),
-        MEDIUM_DIGEST,
-        "the instrument's reverb has changed; adding a tank must never do that"
-    );
+    let rendered = digest(&render(&mut reverb));
+    // Windows' bits: each platform's maths library rounds in its own way (the owner, 2026-10-06:
+    // pin on Windows only).
+    if cfg!(target_os = "windows") {
+        assert_eq!(
+            rendered, MEDIUM_DIGEST,
+            "the instrument's reverb has changed; adding a tank must never do that"
+        );
+    }
 }
 
 #[test]
@@ -75,9 +79,13 @@ fn a_tank_selected_back_is_the_same_tank() {
     reverb.set_model(SpringTankModel::Long);
     let _ = render(&mut reverb);
     reverb.set_model(SpringTankModel::Medium);
+    // Against a fresh medium tank on this machine, not the pin: the property holds bit for bit on
+    // every platform, while the pinned bits are Windows'.
+    let mut fresh = SpringReverb::new();
+    fresh.set_sample_rate(FS);
     assert_eq!(
         digest(&render(&mut reverb)),
-        MEDIUM_DIGEST,
+        digest(&render(&mut fresh)),
         "a tank carries nothing over from the one before it"
     );
 }
