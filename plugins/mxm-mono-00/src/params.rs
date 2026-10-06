@@ -50,7 +50,7 @@ use std::sync::{Arc, RwLock};
 /// the longest — **the ends its own eight-step table had** (the owner: *"if they have different
 /// ranges of time we keep to that"*), so a stored position at either end keeps its division. The
 /// shared ladder holds the dotted divisions that table skipped, so a position between the ends can
-/// land on a neighbouring division — accepted by the owner, 2026-09-25 (`AGENTS.md`).
+/// land on a neighbouring division — accepted by the owner, 2026-09-25 (`NOTES.md`).
 pub const DELAY_SYNC: Ladder = Ladder::new(
     Span::new(Division::ThirtySecond, Division::Half),
     Direction::Time,
@@ -746,7 +746,7 @@ mod tests {
     use super::*;
 
     /// **Every parameter reads the same after the host's own round trip**: printed with its unit,
-    /// parsed, and printed again, it is the same text (`docs/code-review-notes.md` §6).
+    /// parsed, and printed again, it is the same text (mxm-kit's `docs/code-review-notes.md` §6).
     ///
     /// The host never hands a formatter a plain value. The CLAP wrapper's `value_to_text` and
     /// `text_to_value` carry a normalised value in `f64`, scaled by the step count, so a parsed number

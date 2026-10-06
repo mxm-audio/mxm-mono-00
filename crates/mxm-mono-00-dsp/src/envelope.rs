@@ -1,7 +1,7 @@
 //! Analog-style ADSR envelope — the System-100's discrete Roland ADSR, as far as it is documented.
 //!
-//! **A copy of `crates/mxm-poly-06-dsp/src/envelope.rs`, deliberately whole**, stall fix
-//! included: the fourth honest copy the collection's extraction rule asks for. What
+//! **A copy of mxm-poly-06's `crates/mxm-poly-06-dsp/src/envelope.rs`, deliberately whole**,
+//! stall fix included: the fourth honest copy the collection's extraction rule asks for. What
 //! `research:instruments/system-100.md` §9 establishes about the machine's envelope this model already
 //! has by construction — a charging attack that hands over at its peak, decay and release as the
 //! same exponential (one capacitor, two discharge resistors), release allowed during the attack —

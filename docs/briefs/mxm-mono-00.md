@@ -4,6 +4,10 @@ Required by `MXM_DESIGN_SYSTEM.md` §14, written before implementation. Answers 
 order, then records the deliberate deviations and the decisions the plan
 (`plans/plan-mxm-mono-00.md` §9) hands to this document.
 
+*Since the split (2026-10-06):* the design system is mxm-kit's
+[`docs/MXM_DESIGN_SYSTEM.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/MXM_DESIGN_SYSTEM.md),
+`crates/ui` is mxm-kit's too, and the plans cited here are in the private archive.
+
 **Instrument:** a monophonic semi-modular with two oscillators, two envelopes, two LFOs, a
 sample-and-hold, a ring modulator, seventeen routable targets taking twenty-five sources each, and three effects.
 Architecture inspired by the Roland System-100 as its plug-out pictures it; the interface is not.
@@ -134,7 +138,7 @@ from the LFO's own blue.
 case, and this is none of those.
 
 **The plan records this as the owner's choice.** Copper was taken so phase 0 could close; the owner
-may pick another passing candidate, and the change is one constant in `crates/ui/src/theme.rs` and
+may pick another passing candidate, and the change is one constant in mxm-kit's `crates/ui/src/theme.rs` and
 this table.
 
 ## 8. Live visualizations
@@ -178,7 +182,7 @@ either looks was taken, and no image of either is kept in this repository.
 |---|---|
 | The panel layouts and their sliders | §2 forbids copying the inspiring instrument's panel. Controls are grouped by module; the grouping survives because it is the signal flow |
 | **The patch cables and every jack drawn as a jack** | The owner's no-cables ruling: target-local selectors expose the routing parameters without copying the plug-out's trade dress |
-| The keyboard, arpeggiator, scatter, key hold, octave shift | §2 forbids a decorative keyboard; the rest is the host's, per the root's *an instrument does not carry what the player or the DAW already does* |
+| The keyboard, arpeggiator, scatter, key hold, octave shift | §2 forbids a decorative keyboard; the rest is the host's, per the root's *an instrument does not carry what the player or the DAW already does* (the monorepo root's, now in mxm-kit's [`collection-rules.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/collection-rules.md#the-goal-and-how-much-licence-a-copy-has)) |
 | The patch bank, WRITE / READ / SEND / GET | The preset system is the collection's, in the app bar |
 | The A-440 oscillator, check-point jacks, rear jacks | Dropped by the plug-out; nothing for a plugin to do with them. The mixer's external input is kept, as the **External input** target |
 | Silver, black and wood; the wordmarks | §2 and §5.3 |

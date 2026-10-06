@@ -4,7 +4,7 @@
 //!
 //! Named for the machine rather than for what it does, which is the collection's rule for examples:
 //! cargo writes every example in the workspace to one flat `target/*/examples/` directory, so two
-//! crates sharing a name share an output file. See `docs/known-issues.md`.
+//! crates sharing a name share an output file. See mxm-kit's `docs/known-issues.md`.
 //!
 //! ```bash
 //! cargo run -p mxm-mono-00-dsp --release --example system_demo

@@ -7,7 +7,7 @@
 //! hardware's HIGH OUTPUT did.
 //!
 //! **Order: phaser → delay → reverb**, chosen (the manual's text is silent). **Every constant not
-//! taken from a page's measurement is chosen** and listed in the crate's `AGENTS.md`.
+//! taken from a page's measurement is chosen** and listed in the crate's `NOTES.md`.
 //!
 //! # Phaser — `research:effects/system-100-plugout-phaser.md`
 //!
@@ -36,7 +36,7 @@
 //!
 //! ## Three tanks, one of them measured
 //!
-//! [`SpringTankModel`] is an **addition for the standalone effect** (`plugins/mxm-folded-spring`),
+//! [`SpringTankModel`] is an **addition for the standalone effect** (mxm-folded-spring's plugin),
 //! under the collection rule that an instrument's DSP crate may gain inputs but never a behaviour
 //! change: [`SpringTankModel::Medium`] is the measured tank above, is the default, and is what the
 //! instrument uses and can only use. The instrument's render is bit-identical with this here — the

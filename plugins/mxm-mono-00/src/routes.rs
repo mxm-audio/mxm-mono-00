@@ -30,7 +30,7 @@
 //!   hardware's own switch and a different question (wart 17).
 //!
 //! Decision 1.13 permits every one of them, because the sound stays reachable: the reachability
-//! argument is in `plugins/mxm-mono-00/AGENTS.md` and the renders behind it are
+//! argument is in `plugins/mxm-mono-00/NOTES.md` and the renders behind it are
 //! `crates/mxm-mono-00-dsp/tests/conversion.rs`.
 //!
 //! **Rev 3 retired more, for the same two reasons** (`plans/plan-mxm-mono-00-modulation.md`): the
@@ -768,7 +768,8 @@ fn amount(target: usize, source: usize, name: String) -> FloatParam {
 
 /// The pitch inputs' fader law: **square-law about the centre**. A tenth of the travel either side
 /// is an amount of 0.01 — ±1.44 semitones from an LFO — and the retired Vibrato knob's whole
-/// ±12 semitones sits at about 29 %. `plugins/AGENTS.md` names `SymmetricalSkewed` about zero as
+/// ±12 semitones sits at about 29 %. mxm-kit's `docs/plugin-conventions.md` (*Parameters*), which
+/// `plugins/AGENTS.md` links, names `SymmetricalSkewed` about zero as
 /// the tool for a bipolar pitch span this wide, and asks for a reading that resolves below a
 /// semitone, which two decimals of semitones does. Shift is the shared controls' fine drag.
 pub const PITCH_TAPER: FloatRange = FloatRange::SymmetricalSkewed {

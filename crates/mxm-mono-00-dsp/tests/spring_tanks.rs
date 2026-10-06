@@ -1,8 +1,9 @@
 //! **The instrument's tank, pinned.**
 //!
-//! `SpringTankModel` was added so the standalone effect (`plugins/mxm-folded-spring`) can string a
-//! different tank. The collection's rule for that is in this crate's `AGENTS.md`: an instrument's
-//! DSP crate may gain inputs, never a behaviour change. This is that rule as arithmetic.
+//! `SpringTankModel` was added so the standalone effect (the mxm-folded-spring repository's
+//! `plugins/mxm-folded-spring`) can string a different tank. The collection's rule for that is in
+//! this crate's `NOTES.md` (*The spring has three tanks*): an instrument's DSP crate may gain
+//! inputs, never a behaviour change. This is that rule as arithmetic.
 //!
 //! The digest below was taken **on the revision before the models existed**, with a file that
 //! compiled against both, and it did not move when they landed. So `mxm-mono-00` renders exactly

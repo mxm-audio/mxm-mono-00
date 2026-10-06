@@ -66,7 +66,7 @@ the brief's recognisability trial, have not been run; see
 
 **Fidelity is UNVERIFIED.** No hardware was measured, here or in any source this instrument rests
 on. The tests prove the model is self-consistent — not that it sounds like the machine. See
-[`crates/mxm-mono-00-dsp`](../../crates/mxm-mono-00-dsp/AGENTS.md) for every constant that was
+[`crates/mxm-mono-00-dsp`](../../crates/mxm-mono-00-dsp/NOTES.md#what-is-chosen-not-measured) for every constant that was
 chosen rather than measured.
 
 ## Building
@@ -76,4 +76,4 @@ cargo xtask bundle mxm-mono-00 --release
 clap-validator validate "target/bundled/mxm-mono-00.clap"
 ```
 
-MIT licensed — see [LICENSE](LICENSE). All code is original.
+GPL-3.0-or-later — see the repository's [`LICENSE`](../../LICENSE). All code is original.

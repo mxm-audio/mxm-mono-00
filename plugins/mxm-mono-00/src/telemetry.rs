@@ -4,8 +4,8 @@
 //! allocation, and the UI may drop as many frames as it likes — a display that made the audio
 //! thread wait would be a display that could cause a dropout.
 //!
-//! Two rules carried from `plugins/mxm-mono-01/src/telemetry.rs`, both of which exist because the
-//! obvious implementation loses information:
+//! Two rules carried from mxm-mono-01's `plugins/mxm-mono-01/src/telemetry.rs`, both of which
+//! exist because the obvious implementation loses information:
 //!
 //! - **A peak is max-combined and reset when the UI reads it.** Overwriting each block means a
 //!   transient that landed between two frames is simply gone; combining means the value is always

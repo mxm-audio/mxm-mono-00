@@ -14,8 +14,8 @@ rules, the editor contract — live in the parent and are not restated here. Thi
 
 # Ownership
 
-`Cargo.toml`, `LICENSE`, `README.md`, `NOTES.md`, `control-map.json`, `presets/`, `src/` and
-`tests/` ([NOTES.md § Ownership](NOTES.md#ownership-the-files)).
+`Cargo.toml`, `README.md`, `NOTES.md`, `control-map.json`, `presets/`, `src/` and `tests/`
+([NOTES.md § Ownership](NOTES.md#ownership-the-files)); its licence is the repository's root `LICENSE`.
 
 # Local Contracts
 
@@ -150,15 +150,15 @@ rules, the editor contract — live in the parent and are not restated here. Thi
 - Route halves get their own permanent `navigation::at` ids; the coverage check reveals every route
   and opens Advanced (`REVEAL`) before it runs
   ([NOTES.md § Keyboard cursor](NOTES.md#the-keyboard-cursor-reaches-every-route-and-the-coverage-check-has-to-reveal-them)).
-- `editor`, `params` and `telemetry` are `pub` for the layout lab: an in-repository bench API, not a
-  host identifier. This crate owns parameter binding only; shared UI owns geometry and interaction.
+- `editor`, `params` and `telemetry` are `pub` for the layout lab (`apps/mxm-layout-lab`, in the
+  private archive since the split): a bench API, not a host identifier. This crate owns parameter binding only; shared UI owns geometry and interaction.
 - `tests/routing_editor.rs` must drive the real `editor::panel`; geometry or parameter-count tests
   are no substitute, and these checks must survive layout rewrites
   ([NOTES.md § Routing editor tests](NOTES.md#what-the-routing-editor-tests-prove-and-what-they-do-not)).
 
 ## Presets
 
-- `preset.rs` is the `crates/mxm-preset` `Instrument` impl; the fifty factory sounds are generated
+- `preset.rs` is the `Instrument` impl of mxm-kit's `mxm-preset`; the fifty factory sounds are generated
   from `FACTORY_DESIGN`. Regenerate after any parameter change **or any change to what a parameter
   prints** with `cargo test -p mxm-mono-00 --lib write_the_factory_presets -- --ignored`; a print
   change's diff touches `text` lines only (`every_factory_text_is_this_plugins_formatting_of_its_value`;
@@ -177,13 +177,13 @@ cargo test -p mxm-mono-00 --test routing_editor # every target through the panel
 cargo test -p mxm-mono-00 --lib every_card_passes_the_tree_checks_in_every_state
 # Every page, light and dark, for review -> target/layout-tree/mxm-mono-00/<MXM_PICTURES tag>/
 MXM_PICTURES=after cargo test -p mxm-mono-00 --lib tree_pictures -- --ignored
-cargo test -p mxm-layout-lab --no-default-features --features mono-00 # the lab draws these cards
+cargo test -p mxm-layout-lab --no-default-features --features mono-00 # the lab draws these cards (private archive only)
 cargo clippy -p mxm-mono-00 --all-targets
 cargo xtask bundle mxm-mono-00              # debug, for the allocation assertions
 clap-validator validate "target/bundled/mxm-mono-00.clap"
 cargo xtask bundle mxm-mono-00 --release
 clap-validator validate "target/bundled/mxm-mono-00.clap" # validate each before overwriting
-# then newdawn-workspace's editor_resize: every product's editor, natively resized
+# then the workspace's collection-tests/editor_resize.rs: every product's editor, natively resized
 ```
 
 - Run the validator against both the debug and the release bundle. **`param-fuzz-bounds` is not a

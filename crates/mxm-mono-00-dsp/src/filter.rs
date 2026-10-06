@@ -1,10 +1,10 @@
 //! The diode ladder — Roland's first, seven years before the 303's.
 //!
-//! **`crates/mxm-mono-03-dsp/src/filter.rs`, copied whole, with one configuration added.** The
-//! pole-set model is that crate's: four TPT one-poles at spread positions with a saturating global
-//! feedback solved by Newton iteration, the spread being the whole linear character of a diode
-//! ladder (`research:filters/machines/tb303-diode-ladder.md` §2). Nothing about the model changes for
-//! the System-100; what changes is the pole set.
+//! **mxm-mono-03's `crates/mxm-mono-03-dsp/src/filter.rs`, copied whole, with one configuration
+//! added.** The pole-set model is that crate's: four TPT one-poles at spread positions with a
+//! saturating global feedback solved by Newton iteration, the spread being the whole linear
+//! character of a diode ladder (`research:filters/machines/tb303-diode-ladder.md` §2). Nothing
+//! about the model changes for the System-100; what changes is the pole set.
 //!
 //! # The System-100's pole set is chosen, not derived
 //!

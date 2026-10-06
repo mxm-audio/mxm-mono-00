@@ -145,7 +145,7 @@ mod tests {
         let modulated = error_db(true);
         eprintln!("ring modulation aliasing: {modulated:.1} dB (measurement floor {floor:.1} dB)");
         // The floor is the PolyBLEP saw's own aliasing plus the band the decimator removes; the
-        // modulated figure is what the crate's AGENTS.md records.
+        // modulated figure is what the crate's NOTES.md records.
         assert!(
             floor < -20.0,
             "the comparison's own floor is too high: {floor:.1} dB"

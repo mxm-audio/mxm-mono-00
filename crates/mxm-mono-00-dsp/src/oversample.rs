@@ -12,7 +12,7 @@
 //! every even tap but the centre zero, so each direction costs [`HALF_TAPS`] multiplies per base
 //! sample. Its transition band straddles the base Nyquist; the stopband is where the ladder's
 //! harmonics and an oscillation above 24 kHz would otherwise alias. **Chosen**: [`HALF_TAPS`] and
-//! [`KAISER_BETA`], listed in the crate's `AGENTS.md`, and measured by the tests below.
+//! [`KAISER_BETA`], listed in the crate's `NOTES.md`, and measured by the tests below.
 //!
 //! **Latency.** The pair delays the ladder's path by [`LATENCY_SAMPLES`] base samples, about half
 //! a millisecond at 48 kHz. The VCA's gate and envelope act on the delayed audio, which is what

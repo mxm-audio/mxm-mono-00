@@ -44,8 +44,9 @@ pub const NAME: &str = plugin_name!();
 /// of this directory cannot silently move the plugin's identity and orphan every saved project.
 pub const CLAP_ID: &str = concat!("dk.mxm.", plugin_name!());
 
-// Public for `apps/mxm-layout-lab` on the `dynamic-layout` branch: the lab draws these real
-// cards outside a host. Nothing else about them changes, and the shipped cdylib is unaffected.
+// Public for `apps/mxm-layout-lab` (in the private archive since the split) on the
+// `dynamic-layout` branch: the lab draws these real cards outside a host. Nothing else about them
+// changes, and the shipped cdylib is unaffected.
 pub mod editor;
 pub mod params;
 pub mod preset;
@@ -441,9 +442,10 @@ impl MxmMono00 {
                         .request_theme((value.clamp(0.0, 1.0) * 127.0).round() as u8);
                 }
                 // **The mod wheel is a routable source.** It is still consumed as a gesture and
-                // writes no parameter, which is what `docs/MXM_CONTROL_MAP.md`'s CC 1 reservation
-                // forbids; what is a parameter is *how much of it reaches this target*, which is
-                // the amount every other route has (`plan-modulation-routing.md` §5.2 part 1).
+                // writes no parameter, which is what mxm-kit's `docs/MXM_CONTROL_MAP.md`'s CC 1
+                // reservation forbids; what is a parameter is *how much of it reaches this
+                // target*, which is the amount every other route has (`plan-modulation-routing.md`
+                // §5.2 part 1).
                 control_change::MODULATION_MSB if value.is_finite() => {
                     self.wheel[channel as usize % NUM_CHANNELS] = value.clamp(0.0, 1.0);
                 }
@@ -841,7 +843,7 @@ mod init_patch {
         assert_eq!(sorted.len(), ids.len(), "duplicate ids in {ids:?}");
         // 52 controls and 866 routing parameters: 49 until the three tempo syncs of 2026-09-25
         // (`shsync`, `lfo1sync`, `lfo2sync`); 850 routing until the modulation standard added the
-        // Amplitude's fifty and refused thirty-four (2026-09-27). `AGENTS.md` states the same count.
+        // Amplitude's fifty and refused thirty-four (2026-09-27). `NOTES.md` states the same count.
         assert_eq!(ids.len(), 918, "the inventory moved");
     }
 }

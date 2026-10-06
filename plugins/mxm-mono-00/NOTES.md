@@ -2,12 +2,16 @@
 
 The detail behind this folder's AGENTS.md: history, measurements, rationale and worked examples. AGENTS.md is the contract; this file is the reference it links to.
 
+*Since the split (2026-10-06):* the `plans/` cited below are the design history, in the private
+archive.
+
 ## Ownership: the files
 
-`Cargo.toml`, `LICENSE`, `README.md`, `control-map.json`, `presets/`, and `src/` — `lib.rs`,
+`Cargo.toml`, `README.md`, `control-map.json`, `presets/`, and `src/` — `lib.rs`,
 `params.rs`, `preset.rs`, `routes.rs`, `telemetry.rs`, and `editor.rs` with its
 `editor/{binding, sections}.rs`. `tests/routing_editor.rs` exercises the shipped panel's routing
-stacks through an applying host stub.
+stacks through an applying host stub. The folder carried its own MIT `LICENSE` until the split
+(2026-10-06); since then the repository's root `LICENSE`, GPL-3.0-or-later, covers it.
 
 ## Permanent identifiers: the count, and the tests that hold it
 
@@ -119,7 +123,8 @@ through the shipped panel.
 
 **The phaser and the delay are here although no System-100 module had either.** The feature set is
 the SYSTEM-100 plug-out's, and the owner's ruling of 2026-09-02 exempts this instrument — and only
-this one — from *no effect that was not on the original instrument* (root `AGENTS.md`;
+this one — from *no effect that was not on the original instrument* (the monorepo's root `AGENTS.md`,
+now mxm-kit's [`collection-rules.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/collection-rules.md#the-goal-and-how-much-licence-a-copy-has);
 `plugins/AGENTS.md`, *An instrument ships the effects its original had, and no others*). **The
 spring reverb needs no exemption**: the 103 mixer had it. `research:instruments/system-100.md` §12
 and §14 hold the evidence for what the hardware had.
@@ -280,7 +285,7 @@ triggered an envelope** (the modulation standard), so a legato press under GATE 
 ## Tempo sync is resolved once per block from the transport
 
 Four controls sync, each by the collection's one contract (`plugins/AGENTS.md`, *Tempo sync*;
-`crates/mxm-tempo`): the delay time (`temposync`, host name *Delay sync*), the sample clock
+mxm-kit's `crates/mxm-tempo`): the delay time (`temposync`, host name *Delay sync*), the sample clock
 (`shsync`) and both LFO rates (`lfo1sync`, `lfo2sync`, the owner, 2026-09-25). With a switch on and
 a tempo arriving, the control's **modulated** position — so a sequencer's lock picks the division a
 moved control would — picks a division on its ladder (`params::DELAY_SYNC`, `SH_SYNC`, `LFO_SYNC`),
@@ -348,7 +353,7 @@ channel in every editor*.
 
 `control-map.json` fills thirty-five roles. **The LFO 2 page and the `fx.*` roles were added to
 the standard for this instrument and are deliberately absent**: a map naming a role a player's
-compiled-in standard does not declare is refused whole (`docs/MXM_CONTROL_MAP.md` §9), so claiming
+compiled-in standard does not declare is refused whole (mxm-kit's [`docs/MXM_CONTROL_MAP.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/MXM_CONTROL_MAP.md) §9), so claiming
 them would cost every other mapping on any player built before they existed. `filter.hpf` is also
 left unfilled: its curve metadata is not in the standard.
 
@@ -412,7 +417,7 @@ that waited for the pointer would strand. Closed, nothing runs.
 (`MINIMUM`, exercised by `every_dynamic_page_fits_and_every_card_is_reachable`), and the app bar at its last compact step is wider and sets it (`the_app_bar_holds_in_the_minimum_window`).
 
 **Every card is a `mxm_ui::tree`, and every floor is computed** (`plans/plan-layout-tree.md`;
-`crates/ui/AGENTS.md`, *A card body as data*). `sections::card` describes each of the thirteen
+mxm-kit's [`crates/ui/AGENTS.md`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/ui/AGENTS.md), *A card body as data*). `sections::card` describes each of the thirteen
 cards once; `paging::editor::show` measures that tree for the card's floor and height, and
 `sections::paint` draws it leaf by leaf through the shared binding. `page_items` computes each
 floor every frame and passes it as the card's ceiling too, so **every card is exactly as wide as its
@@ -521,7 +526,9 @@ They are `pub`, along with `editor`'s two sub-modules, so
 bench instead of copying two thousand lines of section code that would then drift. **The same is
 true of the other four instruments**, and their `Section` enum, `SECTIONS` and `title()` with it.
 
-This is an in-repository bench API, not a permanent host identifier. `binding` and `sections`
+This is an in-repository bench API, not a permanent host identifier. *Since the split
+(2026-10-06)* the lab and the other instruments are no longer in this repository: the lab stays in
+the private archive, and each instrument has its own repository. `binding` and `sections`
 remain public so the lab can draw real cards; its matrix comparison is lab-owned. CLAP identity and
 permanent parameter IDs are unaffected.
 
@@ -633,7 +640,7 @@ DPI/zoom sweeps and the manual §15/DAW gates remain separate.
 
 ## `preset.rs` is this instrument's `Instrument` impl and its factory set
 
-The system is `crates/mxm-preset` (since 2026-09-04; this file was the fourth copy before that).
+The system is mxm-kit's `crates/mxm-preset` (since 2026-09-04; this file was the fourth copy before that).
 What is local: the
 **fifty factory sounds** in `presets/`, each with its category, generated from `FACTORY_DESIGN` in `preset.rs`'s test
 module (`write_the_factory_presets`, `#[ignore]`d; `the_factory_files_match_the_design_they_were_generated_from`

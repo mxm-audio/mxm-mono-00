@@ -95,7 +95,7 @@ red if somebody tidies them:
   `activate`, never from `process`.
 - **Spring tanks:** `Voice` never calls `set_model` (`Medium` only); lines are sized for
   `LONGEST_TRANSIT_MS`. A `tests/spring_tanks.rs` failure means the reverb changed — not a licence
-  to update the digest ([NOTES.md § The spring](NOTES.md#the-spring-has-three-tanks-and-the-instrument-can-only-have-one-of-them)).
+  to update the digest, which is pinned on Windows only ([NOTES.md § The spring](NOTES.md#the-spring-has-three-tanks-and-the-instrument-can-only-have-one-of-them)).
 
 ## Filter and sample rates
 
@@ -156,7 +156,9 @@ No framework types; realtime rules on every per-sample path; denormals flushed i
 `f32` in the audio path and `f64` for prewarping and coefficients; every saturator bounded exactly
 and monotonic; stated `pub const` output bounds (`filter::OUTPUT_BOUND`, `voice::OUTPUT_BOUND`);
 deterministic seeded randomness, load-bearing here because the export renders through a second
-instance. These are the parent's and the sibling crates', not restated.
+instance. These were the monorepo root's and are the sibling crates' — mxm-mono-01's
+[`crates/mxm-mono-01-dsp/AGENTS.md`](https://github.com/mxm-audio/mxm-mono-01/blob/main/crates/mxm-mono-01-dsp/AGENTS.md)
+states them — not restated.
 
 # Work Guidance
 
@@ -187,8 +189,8 @@ because each regresses silently: exact zero after the tail, no NaN or inf at any
 leaving no tail, the wart table, the activity verdicts, two instances rendering identically.
 
 **Fidelity is UNVERIFIED** and must not be claimed: no hardware was measured, and the listening
-comparison has not been run. Linux and macOS are unverified here
-([NOTES.md § Not verified](NOTES.md#what-is-not-verified-and-must-not-be-claimed)).
+comparison has not been run. Linux is checked in WSL before a push and macOS only by CI on a release
+tag ([NOTES.md § Not verified](NOTES.md#what-is-not-verified-and-must-not-be-claimed)).
 
 # Child DOX Index
 

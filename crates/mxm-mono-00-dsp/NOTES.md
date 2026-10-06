@@ -334,7 +334,8 @@ break quietly:
   the two cannot drift.
 - **`tests/spring_tanks.rs` pins the render by digest**, taken on the revision before the tanks
   existed with a file that compiled against both. A failure there means the instrument's reverb
-  changed; it is not a licence to update the number.
+  changed; it is not a licence to update the number. *Since 2026-10-06* the digest is compared on
+  Windows only: each platform's maths library rounds in its own way.
 
 `SpringReverb::tail_samples` still answers the measured tank's figure, because that is what `Voice`
 asks and `Voice` has no other tank. `tail_samples_for` is the standalone's.
@@ -471,7 +472,11 @@ the *level* as well as finiteness. The RATE CV cannot drive it: its phase integr
 NaN for NaN — so they bound finite input and are not a NaN guard, and a host's NaN would have
 poisoned the mix the same way the unclamped corners did. The guard is not here but at the one boundary every host value passes, the vendored wrapper's parameter setter
 (the nice-plug fork's `PATCHES.md`, defect 4), so every instrument in the collection has it at once.
-`apps/mxm-player/tests/plugin_robustness.rs` holds it against a real host.
+`apps/mxm-player/tests/plugin_robustness.rs` holds it against a real host. *Since the split
+(2026-10-06):* there is no `vendor/`; the wrapper is the MXM fork
+[mxm-audio/nice-plug](https://github.com/mxm-audio/nice-plug/blob/main/PATCHES.md), and that test
+is in mxm-player:
+[`apps/mxm-player/tests/plugin_robustness.rs`](https://github.com/mxm-audio/mxm-player/blob/main/apps/mxm-player/tests/plugin_robustness.rs).
 
 ## The pitch path is the hardware's order, and glide sits after portamento
 
@@ -481,7 +486,7 @@ there, a first note after silence included** (`mxm-mono-01` snaps its first note
 does not). The capacitor is carried as its **remaining distance** from the target it last charged
 toward, so a long portamento lands on its note, where the voltage form stalled — 9 cents short at
 half a second and 48 kHz (`a_portamento_lands_exactly_on_its_note`;
-`crates/mxm-mono-01-dsp/AGENTS.md`, *Numeric contracts*). That capacitor's voltage is the keyboard CV, the KYBD CV OUT column the matrix will
+mxm-mono-01's [`crates/mxm-mono-01-dsp/AGENTS.md`](https://github.com/mxm-audio/mxm-mono-01/blob/main/crates/mxm-mono-01-dsp/AGENTS.md), *Numeric contracts*). That capacitor's voltage is the keyboard CV, the KYBD CV OUT column the matrix will
 carry, and it carries no glide. The glide dip and the vibrato are added afterwards, per VCO,
 through that oscillator's own pitch input — DESTINATION's choice of one oscillator or both is which
 pitch inputs carry the route. A long portamento does not lengthen the dip's recovery, and the tests
@@ -691,7 +696,7 @@ by hand is what keeps the split honest — nothing else would catch a GUI crate 
 
 `[dev-dependencies]` holds **`mxm-measure`**, the collection's measurement rulers — zero dependencies
 at this same floor, reaching only tests and `examples/`, never a shipped `.clap`.
-[`../mxm-measure/AGENTS.md`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/mxm-measure/AGENTS.md)'s verification section checks that rather than
+mxm-kit's [`crates/mxm-measure/AGENTS.md`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/mxm-measure/AGENTS.md)'s verification section checks that rather than
 asserting it.
 
 It also holds **`mxm-audio-file`**, which writes the listening demo, and **`mxm-audio-file-decode`**,
@@ -778,3 +783,8 @@ reference recordings, and it has not been run. Fidelity is UNVERIFIED.
 
 Linux and macOS are unverified — there is no CI (root *Windows, Linux and macOS*) — and the
 development machine is Windows.
+
+*Since the split (2026-10-06):* CI builds and tests on Windows, macOS and Linux on every `v*`
+release tag or when started by hand, and Linux is checked in WSL before every push (root *Windows,
+Linux and macOS*). The pinned digests (`tests/conversion.rs`, `tests/spring_tanks.rs`) are compared
+on Windows only; elsewhere the conversion cases are held by their peaks, within a tolerance.
