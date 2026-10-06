@@ -189,7 +189,7 @@ because each regresses silently: exact zero after the tail, no NaN or inf at any
 leaving no tail, the wart table, the activity verdicts, two instances rendering identically.
 
 **Fidelity is UNVERIFIED** and must not be claimed: no hardware was measured, and the listening
-comparison has not been run. Linux is checked in WSL before a push and macOS only by CI on a release
+comparison has not been run. Linux and macOS are checked later, together and macOS only by CI on a release
 tag ([NOTES.md § Not verified](NOTES.md#what-is-not-verified-and-must-not-be-claimed)).
 
 # Child DOX Index
