@@ -517,7 +517,7 @@ check would pass on an editor that had lost those two.
 ## `editor`, `params` and `telemetry` are public
 
 They are `pub`, along with `editor`'s two sub-modules, so
-[`apps/mxm-layout-lab`](https://github.com/mxm-audio/newdawn-workspace/blob/main/apps/mxm-layout-lab/AGENTS.md) can draw **these real cards** on its
+`apps/mxm-layout-lab` (`apps/mxm-layout-lab/AGENTS.md` in the private archive) can draw **these real cards** on its
 bench instead of copying two thousand lines of section code that would then drift. **The same is
 true of the other four instruments**, and their `Section` enum, `SECTIONS` and `title()` with it.
 
