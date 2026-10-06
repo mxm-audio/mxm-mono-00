@@ -116,7 +116,7 @@ Root owns `Cargo.toml`, `Cargo.lock`, `LICENSE`, `NOTICE.md`, `TRADEMARKS.md`, `
 Each folder with an `AGENTS.md` owns its contents; the index is below.
 
 **Dependencies are pinned exactly and `Cargo.lock` is committed.** The kit comes from mxm-kit at
-the tag `Cargo.toml`'s `[workspace.dependencies]` names (`v0.3.0` at the split), MXM Player and
+the tag `Cargo.toml`'s `[workspace.dependencies]` names (`v0.4.0` since 2026-10-06, `v0.3.0` at the split), MXM Player and
 another product's crates from their repositories at a tag, and nice-plug and
 egui-baseview from their MXM forks (`[patch.crates-io]`).
 
