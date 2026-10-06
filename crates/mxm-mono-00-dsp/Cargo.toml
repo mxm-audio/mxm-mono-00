@@ -1,0 +1,33 @@
+[package]
+name = "mxm-mono-00-dsp"
+description = "DSP for mxm-mono-00, framework-free and unit-testable"
+version.workspace = true
+edition.workspace = true
+# One runtime dependency, `mxm-modulation`, which is itself dependency-free and at this same
+# floor — so this crate still does NOT inherit the 1.95 GUI floor. `cargo tree` is the check.
+rust-version = "1.87"
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+# The collection's routing: the source frame, compaction and the combination laws. Zero
+# dependencies of its own, which is what keeps this crate's floor where it is.
+mxm-modulation.workspace = true
+
+[features]
+# `src/conformance.rs`: this instrument's routing as the modulation standard checks it. Enable it
+# only from `[dev-dependencies]` — the plugin's tests hold its route readings to it — so no shipped
+# graph carries it.
+conformance = ["mxm-modulation/conformance"]
+
+# Measurement rulers for tests and listening harnesses only — a dev-dependency, so it is not
+# in the shipped graph. It has no dependencies of its own and sits at this same floor.
+[dev-dependencies]
+# The modulation standard's checks, for this crate's own tests (`src/conformance.rs`).
+mxm-modulation = { workspace = true, features = ["conformance"] }
+mxm-measure.workspace = true
+# Listening demos write through the collection's encoder and their tests read back through its
+# decoder. Test-only edges, so neither is in the shipped graph.
+mxm-audio-file.workspace = true
+mxm-audio-file-decode.workspace = true

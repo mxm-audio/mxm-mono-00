@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "_comment": [
+    "Which of mxm-mono-00's parameters fill the collection's control roles.",
+    "Roles come from docs/MXM_CONTROL_MAP.md, which is normative; parameters are named by",
+    "their permanent string id, never by display name.",
+    "",
+    "The LFO 2 page and the fx.* roles were added to the standard for this instrument and are",
+    "DELIBERATELY ABSENT here: an instrument map naming a role a player's compiled-in standard",
+    "does not declare is refused WHOLE, so claiming them would cost every mapping below on any",
+    "player built before the roles existed. They are claimed once an unknown role is inert",
+    "rather than fatal - see docs/MXM_CONTROL_MAP.md section 9.",
+    "",
+    "filter.hpf is left unfilled: its curve metadata is not in the standard yet.",
+    "",
+    "osc1.tune and osc2.tune are each oscillator's own coarse tune, so the two knobs change the",
+    "interval the ring modulator and sync turn into timbre. Master tune is off the map.",
+    "",
+    "Every depth a role names is a route amount Init wires, so no role is a dead knob: the",
+    "filter's key track and the LFO's amplitude depth are the keyboard's route on the cutoff and",
+    "LFO 1's route on the tremolo. Three roles are left unfilled, deliberately. lfo1.to_pitch:",
+    "the plug-out's vibrato reached both oscillators, and one parameter cannot drive two routes -",
+    "pointing it at Oscillator 1 alone would turn vibrato into interval modulation. osc1/osc2",
+    "pwm_source: there is no source switch, the source is chosen on the card. osc1/osc2 pwm_depth:",
+    "Init routes nothing to a pulse width, as MANUAL routed nothing, so a depth would be dead."
+  ],
+  "instruments": [
+    {
+      "clap_id": "dk.mxm.mxm-mono-00",
+      "name": "mxm-mono-00",
+      "params": {
+        "osc1.range": "range1",
+        "osc1.wave": "wave1",
+        "osc1.tune": "coarse1",
+        "osc1.pulse_width": "pw1",
+
+        "osc2.range": "range2",
+        "osc2.tune": "coarse2",
+        "osc2.detune": "fine2",
+        "osc2.wave": "wave2",
+        "osc2.pulse_width": "pw2",
+        "osc2.sync": "mod_vco2sync_vco1syon",
+
+        "mixer.src1": "vco1level",
+        "mixer.src2": "vco2level",
+        "mixer.src3": "ringmodlevel",
+        "mixer.noise": "noiselevel",
+
+        "filter.cutoff": "cutoff",
+        "filter.resonance": "resonance",
+        "filter.env_amount": "mod_cutoff_env1",
+        "filter.key_track": "mod_cutoff_key",
+        "filter.lfo_amount": "mod_cutoff_lfo1",
+
+        "amp_env.attack": "vcaattack",
+        "amp_env.decay": "vcadecay",
+        "amp_env.sustain": "vcasustain",
+        "amp_env.release": "vcarelease",
+
+        "filter_env.attack": "vcfattack",
+        "filter_env.decay": "vcfdecay",
+        "filter_env.sustain": "vcfsustain",
+        "filter_env.release": "vcfrelease",
+
+        "lfo1.rate": "lfo1rate",
+        "lfo1.shape": "lfo1shape",
+        "lfo1.to_filter": "mod_cutoff_lfo1",
+        "lfo1.to_amp": "mod_trem_lfo1",
+
+        "voice.glide": "portamento",
+        "voice.note_priority": "priority",
+        "voice.bend_range": "bendrange",
+        "voice.output": "volume"
+      }
+    }
+  ]
+}

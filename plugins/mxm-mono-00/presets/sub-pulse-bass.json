@@ -1,0 +1,3682 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-mono-00",
+  "name": "Sub pulse bass",
+  "category": "bass",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "bendrange": {
+      "v": 0.083333336,
+      "text": "2 st"
+    },
+    "coarse1": {
+      "v": 0.5,
+      "text": "0 st"
+    },
+    "coarse2": {
+      "v": 0.5,
+      "text": "0 st"
+    },
+    "cutoff": {
+      "v": 0.4,
+      "text": "531.5 Hz"
+    },
+    "delay": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "delaytime": {
+      "v": 0.7758014,
+      "text": "375.0 ms"
+    },
+    "fine1": {
+      "v": 0.5,
+      "text": "0.0 cents"
+    },
+    "fine2": {
+      "v": 0.535,
+      "text": "7.0 cents"
+    },
+    "hpf": {
+      "v": 0.0,
+      "text": "10.0 Hz"
+    },
+    "initialgain": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "lfo1offset": {
+      "v": 0.5,
+      "text": "0.0 cents"
+    },
+    "lfo1rate": {
+      "v": 0.6273842,
+      "text": "4.0 Hz"
+    },
+    "lfo1shape": {
+      "v": 0.0,
+      "text": "Sine"
+    },
+    "lfo1sync": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "lfo2offset": {
+      "v": 0.5,
+      "text": "0.0 cents"
+    },
+    "lfo2rate": {
+      "v": 0.43005413,
+      "text": "1.0 Hz"
+    },
+    "lfo2shape": {
+      "v": 0.0,
+      "text": "Sine"
+    },
+    "lfo2sync": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_amplitude_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amplitude_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amplitude_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_bend": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_env1": {
+      "v": 0.7,
+      "text": "+2.80 oct"
+    },
+    "mod_cutoff_env1on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_cutoff_env2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_gate": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_glide": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_key": {
+      "v": 0.5,
+      "text": "+0.00 oct/oct"
+    },
+    "mod_cutoff_keyon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_cutoff_lfo1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfo1on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_cutoff_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_lfo1saw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_lfo1sin": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_lfo1tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_lfo2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_lfo2tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_mix": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_noise": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_press": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_ring": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_sh": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_shclk": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_vco1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_vco1sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_vco2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_vco2sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_vel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_wheel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_bend": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_env1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_env2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_gate": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_glide": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_key": {
+      "v": 0.5,
+      "text": "+0.00 oct/oct"
+    },
+    "mod_lfo1rate_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_lfo1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_lfo1saw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_lfo1sin": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_lfo1tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_lfo2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_lfo2tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_mix": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_noise": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_press": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_ring": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_sh": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_shclk": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_vco1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_vco1sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_vco2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_vco2sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_vel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo1rate_wheel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo1rate_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_bend": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_env1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_env2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_gate": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_glide": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_key": {
+      "v": 0.5,
+      "text": "+0.00 oct/oct"
+    },
+    "mod_lfo2rate_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_lfo1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_lfo1saw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_lfo1sin": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_lfo1tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_lfo2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_lfo2tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_mix": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_noise": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_press": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_ring": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_sh": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_shclk": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_vco1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_vco1sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_vco2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_vco2sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_vel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lfo2rate_wheel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lfo2rate_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_mixin_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_mixin_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_mixin_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_bend": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_env1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_env2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_gate": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_glide": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_key": {
+      "v": 0.5,
+      "text": "+0.00 oct/oct"
+    },
+    "mod_phlfo_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_lfo1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_lfo1saw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_lfo1sin": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_lfo1tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_lfo2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_lfo2tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_mix": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_noise": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_press": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_ring": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_sh": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_shclk": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_vco1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_vco1sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_vco2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_vco2sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_vel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phlfo_wheel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phlfo_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_bend": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_env1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_env2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_gate": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_glide": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_key": {
+      "v": 0.5,
+      "text": "+0.00 oct/oct"
+    },
+    "mod_phman_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_lfo1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_lfo1saw": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_lfo1sin": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_lfo1tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_lfo2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_lfo2tri": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_mix": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_noise": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_press": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_ring": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_sh": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_shclk": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_vco1": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_vco1sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_vco2": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_vco2sy": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_vel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_phman_wheel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_phman_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_pw1_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_press": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_pw1_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw1_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_vel": {
+      "v": 1.0,
+      "text": "+0 %"
+    },
+    "mod_pw1_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw1_wheel": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_pw1_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_pw2_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_press": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_pw2_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_pw2_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_vel": {
+      "v": 1.0,
+      "text": "+0 %"
+    },
+    "mod_pw2_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_pw2_wheel": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_pw2_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_ringin_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_vco1": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_ringin_vco1on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_ringin_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_ringin_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_ringin_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_shsrc_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_shsrc_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_shsrc_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_trem_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_lfo1on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_trem_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_press": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_trem_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_trem_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_vel": {
+      "v": 1.0,
+      "text": "+0 %"
+    },
+    "mod_trem_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_trem_wheel": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_trem_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_env2": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_vcacv_env2on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vcacv_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_vcacv_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_vel": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vcacv_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcacv_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcacv_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_gate": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_vcagate_gateon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vcagate_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_vcagate_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcagate_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcagate_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_env1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_env2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_gate": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_vcfgate_gateon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vcfgate_glide": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_vcfgate_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_lfo1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_lfo1saw": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_lfo1sin": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_lfo1tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_lfo2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_lfo2tri": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_mix": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_ring": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_sh": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_shclk": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_vco1": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_vco1sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_vco2": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vcfgate_vco2sy": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vcfgate_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_bend": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_env1": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_env2": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_gate": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_glide": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_glideon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vco1pitch_key": {
+      "v": 0.5,
+      "text": "+0.00 st/oct"
+    },
+    "mod_vco1pitch_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_lfo1": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_lfo1on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vco1pitch_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_lfo1saw": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_lfo1sin": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_lfo1tri": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_lfo2": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_lfo2tri": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_mix": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_noise": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_press": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_ring": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_sh": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_shclk": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_vco1": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_vco1sy": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_vco2": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_vco2on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vco1pitch_vco2sy": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_vel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco1pitch_wheel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco1pitch_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_bend": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_env1": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_env2": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_gate": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_glide": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_glideon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vco2pitch_key": {
+      "v": 0.5,
+      "text": "+0.00 st/oct"
+    },
+    "mod_vco2pitch_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_lfo1": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_lfo1on": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_vco2pitch_lfo1rsaw": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_lfo1saw": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_lfo1sin": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_lfo1tri": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_lfo2": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_lfo2tri": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_mix": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_noise": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_press": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_ring": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_sh": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_shclk": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_vco1": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_vco1sy": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_vco2": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_vco2sy": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_vel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2pitch_wheel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_vco2pitch_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_env1": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_env1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_env2": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_env2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_gate": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_glide": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_glideon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_key": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_lfo1": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_lfo1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_lfo1rsaw": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_lfo1rsawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_lfo1saw": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_lfo1sawon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_lfo1sin": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_lfo1sinon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_lfo1tri": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_lfo1trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_lfo2": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_lfo2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_lfo2tri": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_lfo2trion": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_mix": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_mixon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_noise": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_ring": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_ringon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_sh": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_shclk": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_shclkon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_shon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_vco1": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_vco1on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_vco1sy": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_vco2sync_vco1syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_vco2": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_vco2on": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_vco2sync_vco2sy": {
+      "v": 0.0,
+      "text": "+0 %"
+    },
+    "mod_vco2sync_vco2syon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "noisecolour": {
+      "v": 0.0,
+      "text": "White"
+    },
+    "noiselevel": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "phaser": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "portamento": {
+      "v": 0.0,
+      "text": "0.0 ms"
+    },
+    "priority": {
+      "v": 0.0,
+      "text": "Low"
+    },
+    "pw1": {
+      "v": 0.6,
+      "text": "32 %"
+    },
+    "pw2": {
+      "v": 1.0,
+      "text": "50 %"
+    },
+    "range1": {
+      "v": 0.4,
+      "text": "16'"
+    },
+    "range2": {
+      "v": 0.2,
+      "text": "32'"
+    },
+    "resonance": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "reverb": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "ringmodlevel": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "shlag": {
+      "v": 0.0,
+      "text": "0.0 ms"
+    },
+    "shrate": {
+      "v": 0.40659744,
+      "text": "4.0 Hz"
+    },
+    "shsync": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "syncstrength": {
+      "v": 0.0,
+      "text": "Strong"
+    },
+    "temposync": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "tone": {
+      "v": 0.5,
+      "text": "0 %"
+    },
+    "tune": {
+      "v": 0.5,
+      "text": "0.0 cents"
+    },
+    "vcaattack": {
+      "v": 0.14645149,
+      "text": "5.0 ms"
+    },
+    "vcadecay": {
+      "v": 0.5,
+      "text": "625.4 ms"
+    },
+    "vcarelease": {
+      "v": 0.3758759,
+      "text": "200.0 ms"
+    },
+    "vcasustain": {
+      "v": 0.6,
+      "text": "60 %"
+    },
+    "vcatrigger": {
+      "v": 0.0,
+      "text": "Gate"
+    },
+    "vcfattack": {
+      "v": 0.14645149,
+      "text": "5.0 ms"
+    },
+    "vcfdecay": {
+      "v": 0.4,
+      "text": "256.4 ms"
+    },
+    "vcfrelease": {
+      "v": 0.3758759,
+      "text": "200.0 ms"
+    },
+    "vcfsustain": {
+      "v": 0.1,
+      "text": "10 %"
+    },
+    "vcftrigger": {
+      "v": 0.0,
+      "text": "Gate"
+    },
+    "vco1level": {
+      "v": 0.8,
+      "text": "80 %"
+    },
+    "vco2level": {
+      "v": 0.5,
+      "text": "50 %"
+    },
+    "volume": {
+      "v": 0.87145656,
+      "text": "-6.0 dB"
+    },
+    "wave1": {
+      "v": 0.5,
+      "text": "Square"
+    },
+    "wave2": {
+      "v": 0.5,
+      "text": "Square"
+    }
+  },
+  "state": null
+}
