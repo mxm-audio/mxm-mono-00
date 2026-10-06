@@ -183,7 +183,7 @@ cargo xtask bundle mxm-mono-00              # debug, for the allocation assertio
 clap-validator validate "target/bundled/mxm-mono-00.clap"
 cargo xtask bundle mxm-mono-00 --release
 clap-validator validate "target/bundled/mxm-mono-00.clap" # validate each before overwriting
-# then the workspace's collection-tests/editor_resize.rs: every product's editor, natively resized
+# then the maintainer's collection-wide editor_resize (not public yet): every editor, natively resized
 ```
 
 - Run the validator against both the debug and the release bundle. **`param-fuzz-bounds` is not a

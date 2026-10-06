@@ -170,8 +170,8 @@ cargo xtask bundle mxm-mono-00 --release
 cargo test -p mxm-mono-00-host-tests            # the slow tier: through MXM Player
 ```
 
-Before pushing, run the first three on Windows and again on Linux in WSL (the workspace's
-`wsl/AGENTS.md`). CI runs the same on Windows, macOS and Linux, on a `v*` release tag or when
+Before pushing, run the first three on Windows and again on Linux (a Linux machine, or WSL
+on Windows). CI runs the same on Windows, macOS and Linux, on a `v*` release tag or when
 started by hand. Golden digests and recorded renders are pinned on Windows only; elsewhere they are
 compared within rounding or skipped (the owner, 2026-10-06).
 
