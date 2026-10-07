@@ -115,9 +115,9 @@ Root owns `Cargo.toml`, `Cargo.lock`, `LICENSE`, `NOTICE.md`, `TRADEMARKS.md`, `
 `CONTRIBUTING.md`, `.cargo/`, `.github/`, `bundler.toml`, `test-bundles.txt` and `xtask/`.
 Each folder with an `AGENTS.md` owns its contents; the index is below.
 
-**Dependencies are pinned exactly and `Cargo.lock` is committed.** The kit comes from mxm-kit at
-the tag `Cargo.toml`'s `[workspace.dependencies]` names (`v0.4.0` since 2026-10-06, `v0.3.0` at the split), MXM Player and
-another product's crates from their repositories at a tag, and nice-plug and
+**Dependencies follow each repository's `main`, and `Cargo.lock` pins the exact commit.** The kit comes from mxm-kit's
+`main` (since 2026-10-07; the tags `v0.4.0` and, at the split, `v0.3.0` before that), MXM Player and
+another product's crates from their repositories' `main`, and nice-plug and
 egui-baseview from their MXM forks (`[patch.crates-io]`).
 
 **Two tiers of tests.** `cargo test` builds the plugin and its DSP only — the loop for a
@@ -127,8 +127,7 @@ is a separate package so the fast tier never builds the player.
 ## Windows, Linux and macOS — all three, always
 
 **An absolute requirement.** Everything here runs on all three; a change that works on one and
-breaks another is a broken change. CI builds and tests on all three, but only on a `v*` release
-tag or when started by hand (the owner, 2026-10-06), so Linux and macOS are checked later, together.
+breaks another is a broken change. CI builds and tests on all three, only when started by hand (the owner, 2026-10-07), so Linux and macOS are checked later, together.
 
 - **Anything platform-specific is `cfg`-gated with every arm implemented**, never one arm and a
   silent nothing elsewhere.
@@ -171,8 +170,7 @@ cargo test -p mxm-mono-00-host-tests            # the slow tier: through MXM Pla
 ```
 
 Before a push, run the first three on Windows; Linux and macOS are checked
-later, together (the owner, 2026-10-06). CI runs the same on Windows, macOS and Linux, on a `v*` tag or when
-started by hand. Golden digests and recorded renders are pinned on Windows only; elsewhere they are
+later, together (the owner, 2026-10-06). CI runs the same on Windows, macOS and Linux, when started by hand. Golden digests and recorded renders are pinned on Windows only; elsewhere they are
 compared within rounding or skipped (the owner, 2026-10-06).
 
 # Child DOX Index
