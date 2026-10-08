@@ -1348,8 +1348,11 @@ impl Voice {
         // --- Stage 2: the LFOs, each rate through its CV input.
         let rate1 = self.lfo_rate(r, target::LFO1_RATE, p.lfo1_rate_hz, p.lfo1_offset_cents);
         let rate2 = self.lfo_rate(r, target::LFO2_RATE, p.lfo2_rate_hz, p.lfo2_offset_cents);
-        // The S&H shape reads the shared S&H OUT — last sample's, the S&H being stage 3.
-        let sh_shared = self.graph.read(source::SH_OUT);
+        // The S&H shape reads the shared S&H OUT — last sample's, the S&H being stage 3 — **from
+        // the module, not the graph**: the graph publishes a source only while a route reads it,
+        // so with S&H on the LFO and nothing routed from S&H itself, the LFO read zero (the owner,
+        // 2026-10-08: "Nothing happens. If I put the S&H directly on the cutoff it works").
+        let sh_shared = self.sh.out();
         let lfo1 = self.lfo1.process(rate1, p.lfo1_shape, sh_shared, fs);
         let lfo2 = self.lfo2.process(rate2, p.lfo2_shape, sh_shared, fs);
         let lfo1_square_high = self.lfo1.square_high();
@@ -1667,6 +1670,36 @@ mod tests {
         let mut v = Voice::new();
         v.set_sample_rate(FS);
         v
+    }
+
+    /// **An LFO on S&H plays the S&H's steps even when no route reads S&H itself** (the owner,
+    /// 2026-10-08: "Nothing happens. If I put the S&H directly on the cutoff it works"). The init
+    /// patch samples noise; LFO 1 reaches the cutoff and nothing reaches it from S&H.
+    #[test]
+    fn an_lfo_on_sample_and_hold_steps_without_a_route_from_the_sample_and_hold() {
+        let mut sound = Sound::default();
+        sound.patch.lfo1_shape = Shape::SampleHold;
+        sound.patch.sh_rate_hz = 40.0;
+        sound.routing.set(target::CUTOFF, source::LFO1, 0.5);
+        assert!(
+            (0..routing::TARGETS).all(|t| !sound.routing.present[t][source::SH_OUT]),
+            "nothing routes from the S&H itself"
+        );
+        let mut v = unarmed_voice();
+        v.set_topology(&sound.routing);
+        let mut steps = Vec::new();
+        for _ in 0..(FS as usize / 4) {
+            let _ = v.process(&sound.patch, &sound.routing);
+            let lfo = v.source_value(source::LFO1);
+            if steps.last() != Some(&lfo) {
+                steps.push(lfo);
+            }
+        }
+        assert!(
+            steps.len() > 5,
+            "a quarter second at 40 Hz is about ten steps, not {}: {steps:?}",
+            steps.len()
+        );
     }
 
     /// **A patch and the grid beside it**, which is how the two travel everywhere now: the routing

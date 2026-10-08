@@ -72,6 +72,11 @@ impl SampleHold {
         self.held
     }
 
+    /// The S&H OUT signal the last `process` returned: what an LFO's S&H position plays.
+    pub fn out(&self) -> f32 {
+        self.out
+    }
+
     /// Advance one sample: run the clock, sample on its edge, slew the output.
     ///
     /// Returns the S&H OUT signal. `input` is the summed S&H input, or `None` when nothing
