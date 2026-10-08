@@ -766,11 +766,11 @@ pub const INIT_PRESENT: [(usize, usize); 9] = [
 /// This is the collision `plan-modulation-routing.md` §7.1 names between decision 1.6 — every route
 /// carries a level — and the init contract's *every amount starts at zero*. It is resolved per row,
 /// and the answer is the same each time: **a route whose depth was not a control before the
-/// conversion has no zero to inherit.** Three of these four were not amounts at all; they were the
-/// jack's internal connection, which is either made or not.
+/// conversion has no zero to inherit.** Three of the first four were not amounts at all; they were
+/// the jack's internal connection, which is either made or not. The fifth is a patch, the owner's.
 ///
 /// `plugins/mxm-mono-00/AGENTS.md` records them as init deviations beside the three it already has.
-pub const INIT_AT_FULL: [(usize, usize); 4] = [
+pub const INIT_AT_FULL: [(usize, usize); 5] = [
     // Both envelope gate rows ← the keyboard gate. Without these a fresh instance never sounds.
     (target::VCF_GATE, source::GATE),
     (target::VCA_GATE, source::GATE),
@@ -782,6 +782,11 @@ pub const INIT_AT_FULL: [(usize, usize); 4] = [
     // because a silent init patch reads as broken. So this one inherits its old default rather
     // than acquiring a new one.
     (target::AMPLIFIER, source::VCA_ADSR),
+    // S&H INPUT ← Noise, the manual's own suggestion for the EXT position (p. 14): with nothing
+    // sampled, an LFO set to S&H was a flat line (the owner, 2026-10-08: "When I select sample
+    // and hold here i cannot hear it"; ruling: Init routes Noise in, visible and removable). Init
+    // sounds the same, since nothing reads the S&H at Init.
+    (target::SH_INPUT, source::NOISE),
 ];
 
 /// The plug-out's SYNC IN normal, **deliberately absent at init**.

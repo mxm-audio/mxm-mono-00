@@ -829,8 +829,9 @@ mod init_patch {
             }
         }
         assert_eq!(
-            wired, 13,
-            "the plug-out wires thirteen: seven through the patch bay's inputs and six on its panel"
+            wired, 14,
+            "the plug-out wires thirteen, seven through the patch bay's inputs and six on its panel, \
+             and Init adds Noise into the S&H input (the owner, 2026-10-08)"
         );
     }
 

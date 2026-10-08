@@ -82,6 +82,10 @@ rules, the editor contract — live in the parent and are not restated here. Thi
   envelope gates ← Gate, Ring mod ← Oscillator 1, VCA level ← Envelope 2. **A route whose depth was
   not a control before has no zero to inherit.** Key follow is bipolar
   ([NOTES.md § The init patch](NOTES.md#the-init-patch-its-deviations-and-the-wiring-that-is-now-data)).
+- **Init also patches Noise into the S&H input, at full** (`INIT_AT_FULL`; the owner, 2026-10-08):
+  the manual's own suggestion, so an LFO set to S&H gives random steps at once instead of a flat
+  line, as a route row the player can see and remove. The S&H keeps its own clock (Sample time),
+  shared by both LFOs. Init sounds the same: nothing reads the S&H at Init.
 
 ## Process, notes and timing
 

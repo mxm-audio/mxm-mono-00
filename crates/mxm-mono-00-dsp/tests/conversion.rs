@@ -303,6 +303,8 @@ fn cases() -> Vec<Case> {
     ));
 
     let mut r = Routing::init();
+    // SAMPLE MODE chose one source, so the S&H samples the reverse saw alone, not Init's noise.
+    r.clear(target::SH_INPUT, source::NOISE);
     r.set(target::SH_INPUT, source::LFO1_CORE_REVERSE_SAW, 1.0);
     r.set(target::VCO1_PITCH, source::SH_OUT, 0.1 * 120.0 / 144.0);
     out.push(case(
@@ -366,13 +368,13 @@ fn a_fresh_patch_carries_the_plug_outs_normalled_connections_and_nothing_else() 
     use mxm_mono_00_dsp::routing::{SOURCES, TARGETS};
     let r = Routing::init();
     // The thirteen the machine itself wires — nine on the patch bay, less GLIDE IN and less the
-    // ring modulator's mixer channel, which is a slider again, and six on the panel — and no
-    // fourteenth.
+    // ring modulator's mixer channel, which is a slider again, and six on the panel — and the
+    // owner's fourteenth, Noise into the S&H input (2026-10-08), and no fifteenth.
     let wired: Vec<(usize, usize)> = (0..TARGETS)
         .flat_map(|t| (0..SOURCES).map(move |s| (t, s)))
         .filter(|&(t, s)| r.present[t][s])
         .collect();
-    assert_eq!(wired.len(), 13, "{wired:?}");
+    assert_eq!(wired.len(), 14, "{wired:?}");
     // Nothing a performance gesture reaches is wired, so a fresh instance is still the copy.
     for s in [
         source::VELOCITY,
