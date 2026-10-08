@@ -537,8 +537,8 @@ impl Voice {
         let mut v = Self {
             vco1: Vco::new(),
             vco2: Vco::new(),
-            lfo1: Lfo::new(),
-            lfo2: Lfo::new(),
+            lfo1: Lfo::seeded(0x5EED_0001),
+            lfo2: Lfo::seeded(0x5EED_0002),
             sh: SampleHold::new(),
             noise: Noise::new(48_000.0),
             hpf: Hpf::new(),
@@ -1348,13 +1348,9 @@ impl Voice {
         // --- Stage 2: the LFOs, each rate through its CV input.
         let rate1 = self.lfo_rate(r, target::LFO1_RATE, p.lfo1_rate_hz, p.lfo1_offset_cents);
         let rate2 = self.lfo_rate(r, target::LFO2_RATE, p.lfo2_rate_hz, p.lfo2_offset_cents);
-        // The S&H shape reads the shared S&H OUT — last sample's, the S&H being stage 3 — **from
-        // the module, not the graph**: the graph publishes a source only while a route reads it,
-        // so with S&H on the LFO and nothing routed from S&H itself, the LFO read zero (the owner,
-        // 2026-10-08: "Nothing happens. If I put the S&H directly on the cutoff it works").
-        let sh_shared = self.sh.out();
-        let lfo1 = self.lfo1.process(rate1, p.lfo1_shape, sh_shared, fs);
-        let lfo2 = self.lfo2.process(rate2, p.lfo2_shape, sh_shared, fs);
+        // Each LFO's S&H shape samples its own noise at its own rate (`lfo.rs`).
+        let lfo1 = self.lfo1.process(rate1, p.lfo1_shape, fs);
+        let lfo2 = self.lfo2.process(rate2, p.lfo2_shape, fs);
         let lfo1_square_high = self.lfo1.square_high();
         self.graph.write(source::LFO1, lfo1);
         self.graph.write(source::LFO2, lfo2);
@@ -1672,23 +1668,20 @@ mod tests {
         v
     }
 
-    /// **An LFO on S&H plays the S&H's steps even when no route reads S&H itself** (the owner,
-    /// 2026-10-08: "Nothing happens. If I put the S&H directly on the cutoff it works"). The init
-    /// patch samples noise; LFO 1 reaches the cutoff and nothing reaches it from S&H.
+    /// **An LFO on S&H steps at its own rate**, through its own route, whatever the S&H module
+    /// does (the owner, 2026-10-08: "Make the lfo sample the noise at its own time").
     #[test]
-    fn an_lfo_on_sample_and_hold_steps_without_a_route_from_the_sample_and_hold() {
+    fn an_lfo_on_sample_and_hold_steps_at_its_own_rate() {
         let mut sound = Sound::default();
         sound.patch.lfo1_shape = Shape::SampleHold;
-        sound.patch.sh_rate_hz = 40.0;
+        sound.patch.lfo1_rate_hz = 20.0;
+        // The module's clock is far slower: the steps are the LFO's, not the module's.
+        sound.patch.sh_rate_hz = 1.0;
         sound.routing.set(target::CUTOFF, source::LFO1, 0.5);
-        assert!(
-            (0..routing::TARGETS).all(|t| !sound.routing.present[t][source::SH_OUT]),
-            "nothing routes from the S&H itself"
-        );
         let mut v = unarmed_voice();
         v.set_topology(&sound.routing);
         let mut steps = Vec::new();
-        for _ in 0..(FS as usize / 4) {
+        for _ in 0..(FS as usize / 2) {
             let _ = v.process(&sound.patch, &sound.routing);
             let lfo = v.source_value(source::LFO1);
             if steps.last() != Some(&lfo) {
@@ -1696,8 +1689,8 @@ mod tests {
             }
         }
         assert!(
-            steps.len() > 5,
-            "a quarter second at 40 Hz is about ten steps, not {}: {steps:?}",
+            (9..=12).contains(&steps.len()),
+            "half a second at 20 Hz is about ten steps, not {}: {steps:?}",
             steps.len()
         );
     }

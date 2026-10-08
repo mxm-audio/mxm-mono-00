@@ -14,11 +14,13 @@
 //! | Square | 0 / +1 | the hardware's |
 //! | Sine | −0.5 … +0.5 | the hardware's |
 //! | Triangle | −0.5 … +0.5 | **chosen** — the plug-out invented the position and documents no level; bipolar like the sine it is shaped from |
-//! | S&H | whatever the shared S&H output is | the plug-out's (manual p. 15): the one S&H OUT signal, not a random source inside the LFO |
+//! | S&H | −0.5 … +0.5, a new level each cycle | **chosen** (the owner, 2026-10-08): each LFO samples noise at its own rate, so Rate means something and the two LFOs step apart. The plug-out passed the one S&H OUT signal through here, which only mirrored the S&H module; that module stays, patched as a source |
 //!
 //! The **PWM triangle** is separate and unipolar, 0 → +6 V — 0 … 0.6 here — and the WAVE FORM
 //! switch does not reach it (wart 5). The **rate** is 0.15–25 Hz on the slider (§3.1); the
 //! plug-out's rate CV row and OFFSET arrive as a rate multiplier the matrix will supply.
+
+use crate::Rng;
 
 /// The slider's range (§3.1).
 pub const RATE_MIN_HZ: f32 = 0.15;
@@ -39,7 +41,7 @@ pub enum Shape {
     #[default]
     Saw,
     Square,
-    /// The shared S&H OUT signal, passed through.
+    /// Noise sampled once a cycle and held: a new random level at the LFO's own rate.
     SampleHold,
 }
 
@@ -50,6 +52,12 @@ pub struct Lfo {
     /// The square's level on the previous sample, for the ADSR trigger's rising edge.
     square_prev: bool,
     rose: bool,
+    /// The S&H shape's noise, one generator per LFO so the two step apart, and its seed for
+    /// `reset`.
+    seed: u32,
+    rng: Rng,
+    /// The level the S&H shape holds until the next cycle; none until it is first asked for.
+    held: Option<f32>,
 }
 
 impl Default for Lfo {
@@ -60,17 +68,26 @@ impl Default for Lfo {
 
 impl Lfo {
     pub const fn new() -> Self {
+        Self::seeded(0x5EED_0001)
+    }
+
+    /// An LFO whose S&H shape draws from `seed`: give each LFO its own.
+    pub const fn seeded(seed: u32) -> Self {
         Self {
             phase: 0.0,
             // Phase zero is in the square's high half, so the first sample is not an edge.
             square_prev: true,
             rose: false,
+            seed,
+            rng: Rng::new(seed),
+            held: None,
         }
     }
 
-    /// Zero the phase. `reset()` only — the LFO free-runs across notes and has no retrigger.
+    /// Zero the phase and restart the noise. `reset()` only — the LFO free-runs across notes and
+    /// has no retrigger.
     pub fn reset(&mut self) {
-        *self = Self::new();
+        *self = Self::seeded(self.seed);
     }
 
     /// Whether the square rose on the last `process` — what the ADSR's LFO trigger position
@@ -133,15 +150,9 @@ impl Lfo {
     }
 
     /// Advance the core by one sample at `rate_hz` and return the switch's output, at the
-    /// shape's own DC level. `sample_hold` is the shared S&H output for the S&H position.
+    /// shape's own DC level.
     #[inline]
-    pub fn process(
-        &mut self,
-        rate_hz: f32,
-        shape: Shape,
-        sample_hold: f32,
-        sample_rate: f32,
-    ) -> f32 {
+    pub fn process(&mut self, rate_hz: f32, shape: Shape, sample_rate: f32) -> f32 {
         let out = match shape {
             Shape::Sine => self.sine(),
             Shape::Triangle => self.core_triangle() - 0.5,
@@ -153,12 +164,18 @@ impl Lfo {
                     0.0
                 }
             }
-            Shape::SampleHold => sample_hold,
+            // The first ask takes a level at once, so switching to S&H never waits a cycle.
+            Shape::SampleHold => *self
+                .held
+                .get_or_insert_with(|| 0.5 * self.rng.next_bipolar()),
         };
 
         self.phase += rate_hz.clamp(RATE_MIN_HZ, RATE_MAX_HZ) / sample_rate;
         if self.phase >= 1.0 {
             self.phase -= 1.0;
+            // A new level once a cycle, at the LFO's own rate, whatever the shape: the noise runs
+            // on, so switching to S&H finds the latest level.
+            self.held = Some(0.5 * self.rng.next_bipolar());
         }
         let square_now = self.phase < 0.5;
         self.rose = square_now && !self.square_prev;
@@ -179,7 +196,7 @@ mod tests {
         let n = FS as usize; // one second at 4 Hz: whole cycles
         let (mut sum, mut lo, mut hi) = (0.0f64, f32::INFINITY, f32::NEG_INFINITY);
         for _ in 0..n {
-            let v = lfo.process(4.0, shape, 0.0, FS);
+            let v = lfo.process(4.0, shape, FS);
             sum += v as f64;
             lo = lo.min(v);
             hi = hi.max(v);
@@ -209,7 +226,7 @@ mod tests {
         let mut lfo = Lfo::new();
         let mut edges = 0usize;
         for _ in 0..(FS * 10.0) as usize {
-            lfo.process(3.0, Shape::Square, 0.0, FS);
+            lfo.process(3.0, Shape::Square, FS);
             if lfo.square_rose() {
                 edges += 1;
             }
@@ -223,7 +240,7 @@ mod tests {
             let mut lfo = Lfo::new();
             let (mut lo, mut hi) = (f32::INFINITY, f32::NEG_INFINITY);
             for _ in 0..(FS as usize) {
-                lfo.process(4.0, shape, 0.0, FS);
+                lfo.process(4.0, shape, FS);
                 let t = lfo.pwm_triangle();
                 lo = lo.min(t);
                 hi = hi.max(t);
@@ -244,7 +261,7 @@ mod tests {
         let mut lfo = Lfo::new();
         let mut edges = 0usize;
         for _ in 0..(FS * 4.0) as usize {
-            lfo.process(1_000.0, Shape::Square, 0.0, FS);
+            lfo.process(1_000.0, Shape::Square, FS);
             if lfo.square_rose() {
                 edges += 1;
             }
@@ -255,9 +272,38 @@ mod tests {
         );
     }
 
+    /// **S&H takes a new level once a cycle, at the LFO's own rate** (the owner, 2026-10-08:
+    /// "Make the lfo sample the noise at its own time"), held in between, within the sine's range.
     #[test]
-    fn the_sample_hold_position_passes_the_shared_signal_through() {
+    fn the_sample_hold_position_steps_once_a_cycle_at_its_own_rate() {
         let mut lfo = Lfo::new();
-        assert_eq!(lfo.process(4.0, Shape::SampleHold, 0.37, FS), 0.37);
+        let mut levels = Vec::new();
+        for _ in 0..FS as usize {
+            let level = lfo.process(4.0, Shape::SampleHold, FS);
+            assert!(
+                (-0.5..=0.5).contains(&level),
+                "{level} is outside the sine's range"
+            );
+            if levels.last() != Some(&level) {
+                levels.push(level);
+            }
+        }
+        assert!(
+            (4..=5).contains(&levels.len()),
+            "a second at 4 Hz is four or five levels, not {}: {levels:?}",
+            levels.len()
+        );
+    }
+
+    /// Each LFO has its own noise, so two on S&H step apart.
+    #[test]
+    fn two_lfos_on_sample_and_hold_step_apart() {
+        let (mut a, mut b) = (Lfo::seeded(1), Lfo::seeded(2));
+        let run = |lfo: &mut Lfo| -> Vec<f32> {
+            (0..FS as usize)
+                .map(|_| lfo.process(4.0, Shape::SampleHold, FS))
+                .collect()
+        };
+        assert_ne!(run(&mut a), run(&mut b));
     }
 }

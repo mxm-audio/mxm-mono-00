@@ -83,9 +83,13 @@ rules, the editor contract — live in the parent and are not restated here. Thi
   not a control before has no zero to inherit.** Key follow is bipolar
   ([NOTES.md § The init patch](NOTES.md#the-init-patch-its-deviations-and-the-wiring-that-is-now-data)).
 - **Init also patches Noise into the S&H input, at full** (`INIT_AT_FULL`; the owner, 2026-10-08):
-  the manual's own suggestion, so an LFO set to S&H gives random steps at once instead of a flat
-  line, as a route row the player can see and remove. The S&H keeps its own clock (Sample time),
-  shared by both LFOs. Init sounds the same: nothing reads the S&H at Init.
+  the manual's own suggestion, so the S&H module, routed as a source, gives random steps at its
+  Sample time at once, as a route row the player can see and remove. Init sounds the same: nothing
+  reads the S&H at Init.
+- **An LFO set to S&H samples its own noise at its own Rate** (`lfo.rs`; the owner, 2026-10-08:
+  "Make the lfo sample the noise at its own time"): a new level each cycle, −0.5 … +0.5 like the
+  sine, each LFO with its own noise. It does not use the S&H module, which the plug-out's position
+  only mirrored (`the_sample_hold_position_steps_once_a_cycle_at_its_own_rate`).
 
 ## Process, notes and timing
 
