@@ -44,7 +44,7 @@ rules, the editor contract — live in the parent and are not restated here. Thi
   (`the_routing_groups_are_the_dsp_targets_in_declared_order`). Removing a source is one parameter
   write that leaves the amount alone, so re-adding restores the depth.
 - A route reads `scale × routing::SOURCE_PEAK[source]`, what the pair delivers at full amount
-  (`a_route_at_full_amount_reads_the_machines_own_number`), through `mxm_modulation_params::signed`,
+  (`a_route_at_full_amount_reads_the_machines_own_number`), through `mxm_params::text::signed`,
   never `-0`. `SOURCE_PEAK` is display-only
   ([NOTES.md § Readings](NOTES.md#a-routes-amount-reads-what-that-pair-delivers)).
 - The pitch rows' faders are square-law about the centre (`routes::PITCH_TAPER`); plain values stay

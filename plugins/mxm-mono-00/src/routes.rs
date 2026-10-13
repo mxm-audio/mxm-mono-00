@@ -1668,7 +1668,7 @@ mod tests {
     /// printed again, it is the same text — at amounts either side of zero, not only the round numbers.
     /// A plain signed format printed `-0 %` there, which parses to zero and prints `+0 %`, and
     /// `clap-validator`'s `param-conversions` fails on that whenever its random values land in the
-    /// sliver (`mxm_modulation_params::signed`).
+    /// sliver (`mxm_params::text::signed`).
     #[test]
     fn every_reading_survives_the_hosts_round_trip_a_rounded_zero_included() {
         let routes = Routes::new();

@@ -42,6 +42,8 @@ use mxm_mono_00_dsp::noise::Colour;
 use mxm_mono_00_dsp::oscillator::{SyncStrength, Wave};
 use mxm_mono_00_dsp::routing::TARGETS;
 use mxm_mono_00_dsp::voice::{Priority, Trigger};
+use mxm_params::text;
+use mxm_params::text::ValueToString;
 use mxm_tempo::{Direction, Division, Ladder, Span};
 use nice_plug::prelude::*;
 use std::sync::{Arc, RwLock};
@@ -240,11 +242,6 @@ impl From<ShapeKind> for Shape {
 // ---------------------------------------------------------------------------------------------
 // Formatting and the builders the panel shares.
 
-/// Formats a parameter value for display.
-type ValueToString = Arc<dyn Fn(f32) -> String + Send + Sync>;
-/// Parses a typed-in value, returning `None` if it cannot be understood.
-type StringToValue = Arc<dyn Fn(&str) -> Option<f32> + Send + Sync>;
-
 /// Format seconds as milliseconds below a second, seconds above.
 ///
 /// **The unit is chosen from what the millisecond text would round to, not from the raw value.**
@@ -263,46 +260,6 @@ fn v2s_time() -> ValueToString {
     })
 }
 
-fn s2v_time() -> StringToValue {
-    Arc::new(|text| {
-        let t = text.trim().to_lowercase();
-        let (number, scale) = if let Some(rest) = t.strip_suffix("ms") {
-            (rest, 0.001)
-        } else if let Some(rest) = t.strip_suffix('s') {
-            (rest, 1.0)
-        } else {
-            (t.as_str(), 0.001)
-        };
-        number.trim().parse::<f32>().ok().map(|v| v * scale)
-    })
-}
-
-/// Show a `0..=1` control as a percentage — **never a negative zero**.
-///
-/// Key follow and Tone cross zero, and `format!("{:.0}", -0.4)` prints `-0`, which a host parses to
-/// zero and prints `0 %`: not idempotent through its conversion. Only a text that reads zero
-/// changes.
-fn v2s_percent() -> ValueToString {
-    Arc::new(|v| {
-        let text = format!("{:.0}", v * 100.0);
-        match text.strip_prefix('-') {
-            Some(digits) if digits.bytes().all(|b| b == b'0') => format!("{digits} %"),
-            _ => format!("{text} %"),
-        }
-    })
-}
-
-fn s2v_percent() -> StringToValue {
-    Arc::new(|text| {
-        text.trim()
-            .trim_end_matches('%')
-            .trim()
-            .parse::<f32>()
-            .ok()
-            .map(|v| v / 100.0)
-    })
-}
-
 /// How fast a level or a depth follows its control, in milliseconds.
 const AMOUNT_SMOOTHING_MS: f32 = 10.0;
 
@@ -310,8 +267,8 @@ const AMOUNT_SMOOTHING_MS: f32 = 10.0;
 fn amount(name: &'static str, default: f32) -> FloatParam {
     FloatParam::new(name, default, FloatRange::Linear { min: 0.0, max: 1.0 })
         .with_smoother(SmoothingStyle::Linear(AMOUNT_SMOOTHING_MS))
-        .with_value_to_string(v2s_percent())
-        .with_string_to_value(s2v_percent())
+        .with_value_to_string(text::percent())
+        .with_string_to_value(text::parse_percent())
 }
 
 /// A time: skewed toward the short end, **unsmoothed** — it sets a state machine's timing.
@@ -326,7 +283,7 @@ fn seconds(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
         },
     )
     .with_value_to_string(v2s_time())
-    .with_string_to_value(s2v_time())
+    .with_string_to_value(text::parse_time())
 }
 
 /// A rate or a corner in hertz, logarithmic across its range.
@@ -340,24 +297,8 @@ fn hertz(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
             factor: FloatRange::skew_factor(-2.0),
         },
     )
-    .with_value_to_string(v2s_hertz())
+    .with_value_to_string(text::tenths_of_hertz_then_kilohertz())
     .with_string_to_value(formatters::s2v_f32_hz_then_khz())
-}
-
-/// Hertz to a tenth below a kilohertz, kilohertz to a tenth above — nice-plug's
-/// `v2s_f32_hz_then_khz(1)` with **the unit chosen from what the hertz text would round to**.
-///
-/// That formatter switches at the raw 1000 Hz, so `999.96 Hz` printed `1000.0 Hz`, which parses to
-/// 1000 and — normalised and back — prints `1.0 kHz`, and a `1.0 kHz` could come back as
-/// `1000.0 Hz`. `mxm-mono-pr1` met it on its cutoff first. The parser is still nice-plug's.
-fn v2s_hertz() -> ValueToString {
-    Arc::new(|hz| {
-        if (hz * 10.0).round() >= 10_000.0 {
-            format!("{:.1} kHz", hz / 1_000.0)
-        } else {
-            format!("{hz:.1} Hz")
-        }
-    })
 }
 
 /// A pitch offset in cents, centred.
@@ -386,8 +327,8 @@ fn pulse_width(name: &'static str) -> FloatParam {
         },
     )
     .with_smoother(SmoothingStyle::Linear(AMOUNT_SMOOTHING_MS))
-    .with_value_to_string(v2s_percent())
-    .with_string_to_value(s2v_percent())
+    .with_value_to_string(text::percent())
+    .with_string_to_value(text::parse_percent())
 }
 
 /// The narrowest manual pulse width — the DSP crate's own clamp.
@@ -658,8 +599,8 @@ impl Default for MxmMono00Params {
                 },
             )
             .with_smoother(SmoothingStyle::Linear(AMOUNT_SMOOTHING_MS))
-            .with_value_to_string(v2s_percent())
-            .with_string_to_value(s2v_percent()),
+            .with_value_to_string(text::percent())
+            .with_string_to_value(text::parse_percent()),
 
             vcf_attack: seconds("Envelope 1 attack", 0.005, ENVELOPE_MIN_S, ENVELOPE_MAX_S),
             vcf_decay: seconds("Envelope 1 decay", 0.3, ENVELOPE_MIN_S, ENVELOPE_MAX_S),
@@ -745,103 +686,10 @@ impl MxmMono00Params {
 mod tests {
     use super::*;
 
-    /// **Every parameter reads the same after the host's own round trip**: printed with its unit,
-    /// parsed, and printed again, it is the same text (mxm-kit's `docs/code-review-notes.md` §6).
-    ///
-    /// The host never hands a formatter a plain value. The CLAP wrapper's `value_to_text` and
-    /// `text_to_value` carry a normalised value in `f64`, scaled by the step count, so a parsed number
-    /// goes through the range's normalisation and back before it is printed again — and a formatter
-    /// that picks its unit or its precision from the *raw* value flips branch when that trip lands a
-    /// hair the other side of the switch: `0.99996 s` printed `1000.0 ms`, which parses to one second
-    /// and prints `1.00 s`. `clap-validator`'s `param-conversions` fails only when its values land in
-    /// that sliver, so one clean run proves nothing.
-    ///
-    /// So this walks the whole parameter map, as the wrapper converts, at the validator's grids, at
-    /// plain values either side of every branch point this file's formatters have — a second and a
-    /// kilohertz, zero where a range crosses it, 0 dB — and at every representable normalised value
-    /// near each of those points.
+    /// **Every parameter's text survives the host's round trip**, with the unit on, across the
+    /// collection's grids and switch points (`mxm_plugin_test::text_checks`).
     #[test]
-    fn every_parameter_reads_the_same_after_the_hosts_round_trip() {
-        let params = MxmMono00Params::default();
-        let map = params.param_map();
-        // `clap-validator` 0.4.1 spends 4000 conversions across the parameters, 5 to 100 each.
-        let installed = 4000usize.div_ceil(map.len()).clamp(5, 100);
-
-        let mut probes: Vec<f32> = vec![
-            // Seconds, printed `{:.1} ms` below one second: the millisecond text reaches `1000.0`
-            // at 0.99995 s.
-            0.9994, 0.9995, 0.9996, 0.999_94, 0.999_949, 0.999_95, 0.999_951, 0.999_96, 0.9999, 1.0,
-            1.000_01, 1.004, 1.005, 1.006,
-            // Hertz, printed `{:.1} Hz` below one kilohertz: the text reaches `1000.0` at 999.95 Hz.
-            999.4, 999.46, 999.49, 999.5, 999.9, 999.94, 999.95, 999.96, 1_000.0, 1_000.04, 1_000.1,
-            1_049.9, 1_050.0, 1_050.1,
-        ];
-        // Either side of zero, where a plain `{:.N}` prints a negative zero.
-        probes.push(0.0);
-        for decade in [1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1] {
-            for multiple in [1.0, 4.0, 5.0, 6.0] {
-                probes.extend([decade * multiple, -decade * multiple]);
-            }
-        }
-        // Either side of 0 dB, for a gain shown in decibels.
-        for db in [1e-4, 1e-3, 0.04, 0.05, 0.06] {
-            probes.extend([util::db_to_gain(db), util::db_to_gain(-db)]);
-        }
-        // The branch points themselves, where every nearby normalised value is tried too.
-        let edges = [0.0, 0.999_95, 1.0, 999.95, 1_000.0];
-
-        let mut failures = Vec::new();
-        for (id, param, _) in &map {
-            // SAFETY: `params` owns every parameter these pointers name and outlives the loop; this
-            // is the access the wrapper makes.
-            unsafe {
-                let steps = param.step_count();
-                let scale = steps.unwrap_or(1) as f64;
-                let mut values: Vec<f64> = (0..=19)
-                    .map(|i| scale * f64::from(i) / 19.0)
-                    .chain((0..installed).map(|i| scale * i as f64 / (installed - 1) as f64))
-                    .collect();
-                if steps.is_none() {
-                    let (low, high) = (param.preview_plain(0.0), param.preview_plain(1.0));
-                    values.extend(
-                        probes
-                            .iter()
-                            .map(|&plain| f64::from(param.preview_normalized(plain))),
-                    );
-                    for &edge in edges.iter().filter(|&&edge| low <= edge && edge <= high) {
-                        let mut up = param.preview_normalized(edge);
-                        let mut down = up;
-                        for _ in 0..=64 {
-                            values.extend([f64::from(up), f64::from(down)]);
-                            up = up.next_up().min(1.0);
-                            down = down.next_down().max(0.0);
-                        }
-                    }
-                }
-                // `ext_params_value_to_text` and `ext_params_text_to_value`, as the wrapper has them.
-                let text_of = |value: f64| {
-                    param.normalized_value_to_string(value as f32 / scale as f32, true)
-                };
-                for value in values {
-                    let first = text_of(value);
-                    let Some(back) = param.string_to_normalized_value(&first) else {
-                        failures.push(format!("{id}: {first:?} does not parse"));
-                        continue;
-                    };
-                    let second = text_of(f64::from(back) * scale);
-                    if second != first {
-                        failures.push(format!("{id}: {first:?} parses and reads {second:?}"));
-                    }
-                }
-            }
-        }
-        failures.sort();
-        failures.dedup();
-        assert!(
-            failures.is_empty(),
-            "{} texts changed through the host's conversion:\n{}",
-            failures.len(),
-            failures.join("\n")
-        );
+    fn every_parameter_text_survives_the_hosts_round_trip() {
+        mxm_plugin_test::text_checks::every_text_round_trips(&MxmMono00Params::default(), &[]);
     }
 }

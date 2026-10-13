@@ -873,14 +873,8 @@ mod tests {
     }
 
     fn tone_level(y: &[f32], hz: f32) -> f32 {
-        let n = y.len();
-        let (mut re, mut im) = (0.0f64, 0.0f64);
-        for (i, &v) in y.iter().enumerate() {
-            let ang = std::f64::consts::TAU * hz as f64 * i as f64 / FS as f64;
-            re += v as f64 * ang.cos();
-            im += v as f64 * ang.sin();
-        }
-        ((re * re + im * im).sqrt() * 2.0 / n as f64) as f32
+        mxm_measure::spectrum::component_amplitude(y, f64::from(hz), f64::from(FS))
+            .expect("a finite, non-empty tail") as f32
     }
 
     #[test]

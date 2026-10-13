@@ -9,9 +9,6 @@
 //! Skips, with the reason, when the bundle is not built: run
 //! `cargo xtask bundle mxm-mono-00 --release` first.
 
-use mxm_player_harness::app_harness;
-
-use mxm_player::events::input::Payload;
 use mxm_player::session::{FRAMES_PER_BLOCK, Session};
 use std::path::PathBuf;
 
@@ -20,9 +17,7 @@ const SAMPLE_RATE: f64 = 48_000.0;
 const SKIP: &str = "skipping: run `cargo xtask bundle mxm-mono-00 --release`";
 
 fn bundle() -> Option<(PathBuf, PathBuf)> {
-    let dir = app_harness::bundled_dir_with("mxm-mono-00")?;
-    let file = dir.join("mxm-mono-00.clap");
-    file.exists().then_some((dir, file))
+    mxm_player_harness::host_test::plugin_bundle("mxm-mono-00")
 }
 
 fn session(name: &str) -> Option<Session> {
@@ -82,19 +77,7 @@ fn brightness(samples: &[f32]) -> f32 {
 
 /// Sets a parameter by display name, as a position in its normalised range, and lets it settle.
 fn set_param(session: &mut Session, name: &str, fraction: f64) -> String {
-    let param = session
-        .state()
-        .param(name)
-        .unwrap_or_else(|| panic!("`{name}` is not a parameter"))
-        .clone();
-    let value = param.min + fraction * (param.max - param.min);
-    session
-        .app()
-        .engine_mut()
-        .push_gui_event(Payload::ParamValue {
-            param_id: param.id,
-            value,
-        });
+    mxm_player_harness::host_test::push_fraction(session, name, fraction);
     session.advance_blocks(4).expect("the session advances");
     session
         .state()

@@ -79,7 +79,7 @@ route, the collection's standard — `+1.00 oct/oct` of key tracking (it read th
 reads ±72 and an LFO or the glide ±144: EXT CV's 120 plus the glide input's 2 and the vibrato's 12,
 which one source could once reach at the same time, fits inside one route. `a_route_at_full_amount_reads_the_machines_own_number` pins each against the
 DSP's own constant, so a scale that moves moves the reading with it.
-**It never prints a negative zero**: its number goes through `mxm_modulation_params::signed`, and
+**It never prints a negative zero**: its number goes through `mxm_params::text::signed`, and
 `every_reading_survives_the_hosts_round_trip_a_rounded_zero_included` sends every amount through
 the host's own conversion either side of zero, where a plain signed format printed `-0`, which
 `clap-validator`'s `param-conversions` fails whenever its random values land there.
@@ -496,7 +496,7 @@ the stacks already show. What the captions explained that a player needs stayed 
 sentence; the rest went. The developer Parameters list drew them too;
 it no longer does. Only live readings — the delay's — remain as text on a card.
 
-The first derived musician page opens by default. `editor/binding.rs` re-exports `mxm_preset::binding`, the collection's one binding (2026-09-24),
+The first derived musician page opens by default. `editor/binding.rs` re-exports `mxm_params::binding`, the collection's one binding (2026-09-24),
 whose `panel` is this editor's module-relative label (`binding_for`); the identity accent is `mxm_ui::theme::COPPER`, measured in the
 brief's §7. **Built, not signed off**: the §15 QA gate by eye at every zoom and in both themes, and
 the brief's §12 trial, have not been run; the light theme at 100 % has been looked at through the

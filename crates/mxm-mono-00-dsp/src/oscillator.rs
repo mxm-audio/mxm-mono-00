@@ -427,29 +427,14 @@ mod tests {
     const RATES: [f32; 4] = [44_100.0, 48_000.0, 96_000.0, 192_000.0];
 
     /// Frequency from the time between the first and last rising zero crossing, interpolated —
-    /// counting whole crossings over a fixed window quantises to ±1 cycle, which at 55 Hz over
-    /// two seconds is ±9 cents, too coarse to tell a tuning error from rounding.
+    /// `mxm_measure::pitch::frequency_by_crossings`, which this crate's own fix became.
     fn measure_freq(wave: Wave, freq: f32, fs: f32, secs: f32) -> f32 {
         let mut vco = Vco::new();
-        let n = (fs * secs) as usize;
-        let (mut first, mut last, mut count) = (None::<f64>, 0.0f64, 0usize);
-        let mut prev = vco.process(freq, wave, 0.5, fs);
-        for i in 1..n {
-            let y = vco.process(freq, wave, 0.5, fs);
-            if prev <= 0.0 && y > 0.0 {
-                let frac = (-prev / (y - prev)) as f64;
-                let t = (i as f64 - 1.0 + frac) / fs as f64;
-                if first.is_none() {
-                    first = Some(t);
-                } else {
-                    last = t;
-                    count += 1;
-                }
-            }
-            prev = y;
-        }
-        let first = first.expect("no zero crossings");
-        (count as f64 / (last - first)) as f32
+        let rendered: Vec<f32> = (0..(fs * secs) as usize)
+            .map(|_| vco.process(freq, wave, 0.5, fs))
+            .collect();
+        mxm_measure::pitch::frequency_by_crossings(&rendered, f64::from(fs))
+            .expect("a finite render with zero crossings") as f32
     }
 
     #[test]

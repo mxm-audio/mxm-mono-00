@@ -25,8 +25,8 @@ impl mxm_preset::Instrument for MxmMono00Params {
     }
 
     /// In declaration order, from the one list the editor draws from.
-    fn parameters(&self) -> Vec<(&'static str, &dyn mxm_preset::ErasedParam)> {
-        let mut out: Vec<(&'static str, &dyn mxm_preset::ErasedParam)> =
+    fn parameters(&self) -> Vec<(&'static str, &dyn mxm_params::ErasedParam)> {
+        let mut out: Vec<(&'static str, &dyn mxm_params::ErasedParam)> =
             crate::editor::sections::all_parameters(self)
                 .into_iter()
                 .map(|bound| (bound.id, bound.param))
@@ -1135,35 +1135,11 @@ mod tests {
         }
     }
 
-    /// **Every stored `text` is this plugin's own formatting of the `v` beside it.**
-    ///
-    /// `text` is never loaded, which is exactly why nothing else notices it going stale: a change
-    /// to a reading leaves every file loading the same sound while telling whoever reads it
-    /// something else. The test above compares only `v`, and 134 route readings shipped from
-    /// before `SOURCE_PEAK` entered them — `+5.83 oct` where the plugin prints `+3.50 oct` (audit
-    /// D17). This compares text, in a test, and never at load: the format's *no mismatch
-    /// detection* is about loading.
+    /// **Every stored `text` is this plugin's own formatting of the `v` beside it**
+    /// (`mxm_preset::stale_factory_texts`).
     #[test]
     fn every_factory_text_is_this_plugins_formatting_of_its_value() {
-        let params = params();
-        let bindings = mxm_preset::Instrument::parameters(&params);
-        let mut stale = Vec::new();
-        for (name, text) in FACTORY_FILES {
-            let preset = Preset::parse(text, crate::CLAP_ID).expect("parses");
-            for (id, value) in &preset.params {
-                // An unknown id is `every_factory_preset_covers_every_parameter`'s to report.
-                let Some((_, param)) = bindings.iter().find(|(bound, _)| bound == id) else {
-                    continue;
-                };
-                let printed = param.format(value.v);
-                if printed != value.text {
-                    stale.push(format!(
-                        "{name:?} `{id}` stores {:?}, the plugin prints {printed:?}",
-                        value.text
-                    ));
-                }
-            }
-        }
+        let stale = mxm_preset::stale_factory_texts(&MxmMono00Params::default());
         assert!(
             stale.is_empty(),
             "{} stale texts — regenerate the files:\n{}",
