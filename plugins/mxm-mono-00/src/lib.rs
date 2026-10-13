@@ -448,18 +448,20 @@ impl MxmMono00 {
                 // The developer channel, only when this instance was started with it.
                 DEV_VIEW_CC if self.dev_cc => self
                     .telemetry
+                    .dev
                     .request_view((value.clamp(0.0, 1.0) * 127.0).round() as u8),
                 DEV_DISCLOSURE_CC if self.dev_cc => {
-                    self.telemetry.request_disclosure(value >= 0.5);
+                    self.telemetry.dev.request_disclosure(value >= 0.5);
                 }
                 DEV_BROWSER_CC if self.dev_cc => {
-                    self.telemetry.request_browser(value >= 0.5);
+                    self.telemetry.dev.request_browser(value >= 0.5);
                 }
                 // A theme by index, 0 light / 1 dark / 2 system, as the app bar's control lists
                 // them. Applied to the editor and never saved: a capture run must not rewrite the
                 // choice the person at the machine made.
                 DEV_THEME_CC if self.dev_cc => {
                     self.telemetry
+                        .dev
                         .request_theme((value.clamp(0.0, 1.0) * 127.0).round() as u8);
                 }
                 // **The mod wheel is a routable source.** It is still consumed as a gesture and
@@ -644,7 +646,7 @@ impl Plugin for MxmMono00 {
                         channel[i] = sample;
                     }
                 }
-                self.telemetry.publish_peak(block_peak);
+                self.telemetry.meter.publish(block_peak);
                 for column in Column::ALL {
                     let level = match AUDIO_COLUMNS.iter().position(|c| *c == column) {
                         Some(at) => audio_peaks[at],
@@ -935,10 +937,10 @@ mod notes {
         cc(&mut plugin, crate::DEV_DISCLOSURE_CC, 127);
         cc(&mut plugin, crate::DEV_BROWSER_CC, 127);
         cc(&mut plugin, crate::DEV_THEME_CC, 1);
-        assert_eq!(plugin.telemetry.take_view_request(), None);
-        assert_eq!(plugin.telemetry.take_disclosure_request(), None);
-        assert_eq!(plugin.telemetry.take_browser_request(), None);
-        assert_eq!(plugin.telemetry.take_theme_request(), None);
+        assert_eq!(plugin.telemetry.dev.take_view(), None);
+        assert_eq!(plugin.telemetry.dev.take_disclosure(), None);
+        assert_eq!(plugin.telemetry.dev.take_browser(), None);
+        assert_eq!(plugin.telemetry.dev.take_theme(), None);
 
         plugin.dev_cc = true;
         cc(&mut plugin, crate::DEV_VIEW_CC, 2);
@@ -946,25 +948,25 @@ mod notes {
         cc(&mut plugin, crate::DEV_BROWSER_CC, 127);
         cc(&mut plugin, crate::DEV_THEME_CC, 1);
         assert_eq!(
-            plugin.telemetry.take_view_request(),
+            plugin.telemetry.dev.take_view(),
             Some(2),
             "FX is the third view"
         );
-        assert_eq!(plugin.telemetry.take_disclosure_request(), Some(true));
-        assert_eq!(plugin.telemetry.take_browser_request(), Some(true));
+        assert_eq!(plugin.telemetry.dev.take_disclosure(), Some(true));
+        assert_eq!(plugin.telemetry.dev.take_browser(), Some(true));
         assert_eq!(
-            plugin.telemetry.take_theme_request(),
+            plugin.telemetry.dev.take_theme(),
             Some(1),
             "1 is dark, as mxm_ui::theme::from_index reads it"
         );
         // Light is index 0 — a request like any other, not the absence of one.
         cc(&mut plugin, crate::DEV_THEME_CC, 0);
-        assert_eq!(plugin.telemetry.take_theme_request(), Some(0));
+        assert_eq!(plugin.telemetry.dev.take_theme(), Some(0));
         // View zero is a request too, not the absence of one.
         cc(&mut plugin, crate::DEV_VIEW_CC, 0);
-        assert_eq!(plugin.telemetry.take_view_request(), Some(0));
+        assert_eq!(plugin.telemetry.dev.take_view(), Some(0));
         cc(&mut plugin, crate::DEV_DISCLOSURE_CC, 0);
-        assert_eq!(plugin.telemetry.take_disclosure_request(), Some(false));
+        assert_eq!(plugin.telemetry.dev.take_disclosure(), Some(false));
     }
 
     #[test]

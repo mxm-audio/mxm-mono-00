@@ -806,7 +806,7 @@ fn navigation_has_no_patch_page_and_sample_hold_is_editable_on_synth() {
         (127, "Routing"),
         (126, "Routing"),
     ] {
-        telemetry.request_view(index);
+        telemetry.dev.request_view(index);
         harness.run_steps(3);
         let texts = painted_text(harness.output());
         assert!(

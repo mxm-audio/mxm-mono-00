@@ -208,7 +208,7 @@ pub fn panel(
     // `inert` both ask whether another surface owns this frame's keyboard.
     let busy = presets.holds_the_keyboard() || text_entry.values().any(Option::is_some);
     mxm_ui::paging::editor::hold(ui.ctx(), busy);
-    mxm_ui::paging::editor::developer_request(ui.ctx(), view, telemetry.take_view_request());
+    mxm_ui::paging::editor::developer_request(ui.ctx(), view, telemetry.dev.take_view());
 
     // **The keyboard cursor moves before anything is drawn**, so a navigation arrow is consumed
     // here rather than also walking egui's own focus ring. It reads the registry and the exact
@@ -221,22 +221,22 @@ pub fn panel(
     } else {
         mxm_ui::navigation::paged_with_bar(ui.ctx(), nav, busy, &[VOLUME_CARD]);
     }
-    if let Some(open) = telemetry.take_browser_request() {
+    if let Some(open) = telemetry.dev.take_browser() {
         presets.set_browser_open(open);
     }
     // A theme, by index. Applied and not stored: this channel is how a screenshot run and a test
     // reach a state, and neither should overwrite the choice made in the control.
-    if let Some(index) = telemetry.take_theme_request()
+    if let Some(index) = telemetry.dev.take_theme()
         && let Some(preference) = mxm_ui::theme::from_index(index)
     {
         ui.ctx().set_theme(preference);
     }
-    if let Some(open) = telemetry.take_disclosure_request() {
+    if let Some(open) = telemetry.dev.take_disclosure() {
         ui.data_mut(|d| d.insert_temp(sections::disclosure_id(sections::ADVANCED), open));
     }
 
-    let peak = telemetry.take_peak();
-    let clipped = telemetry.clipped();
+    let peak = telemetry.meter.take();
+    let clipped = telemetry.meter.clipped();
     let activity = telemetry.activity();
     mxm_ui::AppBar::new(crate::NAME).show_with(
         ui,
@@ -245,7 +245,7 @@ pub fn panel(
         |ui| {
             activity_indicator(ui, tokens, activity);
             if mxm_ui::shell::level_meter(ui, tokens, peak, clipped) {
-                telemetry.clear_clip();
+                telemetry.meter.clear_clip();
             }
             // Design system §3.1 slot 6: the output control sits beside its meter, not on a card.
             // A bar card, so the keyboard cursor reaches it although the paging report cannot
@@ -578,7 +578,7 @@ mod tests {
     fn every_dynamic_page_fits_and_every_card_is_reachable() {
         let params = MxmMono00Params::default();
         let telemetry = Telemetry::default();
-        telemetry.request_disclosure(true);
+        telemetry.dev.request_disclosure(true);
         let host = NoHost;
         let setter = ParamSetter::new(&host);
         let mut view = 0;
@@ -624,7 +624,7 @@ mod tests {
         let telemetry = Telemetry::default();
         let host = NoHost;
         let setter = ParamSetter::new(&host);
-        telemetry.request_view(view as u8);
+        telemetry.dev.request_view(view as u8);
         let mut view = view;
         let mut text_entry = HashMap::new();
         let mut presets = PresetUi::at(crate::preset::Library::at(None), &params);
