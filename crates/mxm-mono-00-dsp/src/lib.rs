@@ -3,9 +3,11 @@
 //! Deliberately free of any plugin-framework types: everything here takes plain values and a
 //! sample rate, so the whole instrument is testable with `cargo test` and no host involved.
 //!
-//! **The fourth honest copy.** `flush`, the PolyBLEP residual, the Padé approximants and the ADSR
-//! are copied whole from the sibling crates, as `plans/plan-mxm-mono-00.md` §7.2 says, and this
-//! crate depends on none of them; its noise generator is `mxm-rng`'s `Xorshift32`. What it adds is the machine's: a triangle by switched
+//! **The fourth honest copy.** What this crate copied from its siblings and proved identical is the
+//! kit's now: `flush`, `tanh_approx`, `tan_approx`, the PolyBLEP residual and the pulse clamp are
+//! `mxm-dsp`'s, the noise generator `mxm-rng`'s. Its ADSR stays its own (the machine's 0.4 ms floor
+//! is the one difference), as do the diode ladder and everything else that is the machine's. What it
+//! adds is the machine's: a triangle by switched
 //! inversion, coloured noise, an LFO whose shapes sit at three DC levels, a VCA whose tremolo can
 //! only dip, a portamento that is a hold capacitor, and a glide that is one RC on a gate edge.
 //!

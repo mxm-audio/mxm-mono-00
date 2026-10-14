@@ -716,11 +716,12 @@ the call site, because normalisation is this crate's judgement and not the encod
 - **The fourth honest copy**, and its routing frame has now been extracted: the collection's first
   shared DSP crate is [`crates/mxm-modulation`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/mxm-modulation/AGENTS.md), on the owner's ruling
   of 2026-09-10 and on the evidence of this crate's `Columns` being the same object as two siblings'.
-  Everything else here was copied whole and **is still not extracted from**. What
-  this crate owes the extraction plan is the evidence row `plans/plan-mxm-mono-00.md` §7.2 names:
-  so far the ADSR, `flush`, `tanh_approx` and the PolyBLEP residual are **identical** to
-  `mxm-poly-06-dsp`'s (the generator they shared is `mxm-rng`'s, the audit's O3); the diode ladder is `mxm-mono-03-dsp`'s **with one configuration added and
-  its `tanh` shared from `lib.rs`** — identical in equation, not in file.
+  The evidence row `plans/plan-mxm-mono-00.md` §7.2 names has since been spent: `flush`,
+  `tanh_approx`, `tan_approx`, the PolyBLEP residual and the pulse clamp proved identical to
+  `mxm-poly-06-dsp`'s and are `mxm-dsp`'s (the audit's O1), the generator `mxm-rng`'s (O3). **What
+  stays copied:** the ADSR, identical in code to poly-06's but for `MIN_TIME_S` (this machine's
+  0.4 ms) — the first candidate for a parametrised step — and the diode ladder, `mxm-mono-03-dsp`'s
+  **with one configuration added**, its `tanh` now `mxm-dsp`'s: identical in equation, not in file.
 
 ## Verification: the rulers, the demo and the properties the tests keep
 

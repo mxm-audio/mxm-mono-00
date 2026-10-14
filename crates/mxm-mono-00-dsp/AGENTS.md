@@ -162,8 +162,9 @@ states them — not restated.
 
 # Work Guidance
 
-- Only the routing frame is extracted (into `mxm-modulation`); the rest is copied and not yet
-  extracted from ([NOTES.md § The fourth honest copy](NOTES.md#the-fourth-honest-copy-what-this-crate-owes-the-extraction-plan)).
+- Extracted: the routing frame (`mxm-modulation`), the generator (`mxm-rng`) and the byte-identical
+  primitives (`mxm-dsp`). The ADSR (its 0.4 ms floor) and the ladder stay local copies
+  ([NOTES.md § The fourth honest copy](NOTES.md#the-fourth-honest-copy-what-this-crate-owes-the-extraction-plan)).
 - What remains is the plugin's: its editor, and the fidelity gate's
   listening comparison, which no test here can stand in for.
 - Filter theory is [`docs/filters/`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/filters/README.md); oscillators
