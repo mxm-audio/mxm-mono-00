@@ -19,7 +19,7 @@
 //! value slews toward the last sample with the lag's time constant. The lag's time constant is
 //! the slider's, "0–2 s" per the specification, and is not smoothed.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
 
 pub const CLOCK_MIN_HZ: f32 = 0.6;
 pub const CLOCK_MAX_HZ: f32 = 125.0;

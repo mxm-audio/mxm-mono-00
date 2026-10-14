@@ -7,19 +7,12 @@
 //!
 //! The one-pole TPT form `mxm-poly-06-dsp` uses, as a highpass.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
+use mxm_dsp::shape::tan_approx;
 
 pub const CUTOFF_MIN_HZ: f32 = 10.0;
 pub const CUTOFF_MAX_HZ: f32 = 10_000.0;
 pub const NYQUIST_FRACTION: f32 = 0.45;
-
-/// `tan(x)` via the [5/4] Padé approximant, for `x` in `[0, π · 0.45]`.
-#[inline]
-pub fn tan_approx(x: f64) -> f64 {
-    let x2 = x * x;
-    let x4 = x2 * x2;
-    x * (945.0 - 105.0 * x2 + x4) / (945.0 - 420.0 * x2 + 15.0 * x4)
-}
 
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Hpf {

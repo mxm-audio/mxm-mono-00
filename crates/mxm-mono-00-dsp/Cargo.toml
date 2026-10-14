@@ -3,14 +3,15 @@ name = "mxm-mono-00-dsp"
 description = "DSP for mxm-mono-00, framework-free and unit-testable"
 version.workspace = true
 edition.workspace = true
-# Two runtime dependencies, `mxm-modulation` and `mxm-rng`, both dependency-free and at this same
-# floor — so this crate still does NOT inherit the 1.95 GUI floor. `cargo tree` is the check.
+# Three runtime dependencies, `mxm-modulation`, `mxm-rng` and `mxm-dsp`, all dependency-free and at
+# this same floor — so this crate still does NOT inherit the 1.95 GUI floor. `cargo tree` is the check.
 rust-version = "1.87"
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
 
 [dependencies]
+mxm-dsp.workspace = true
 mxm-rng.workspace = true
 # The collection's routing: the source frame, compaction and the combination laws. Zero
 # dependencies of its own, which is what keeps this crate's floor where it is.

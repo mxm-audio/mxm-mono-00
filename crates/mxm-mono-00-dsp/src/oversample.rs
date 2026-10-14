@@ -19,7 +19,7 @@
 //! the hardware's amplifier does to its filter's output in any case. The plugin does not report
 //! the figure — its AGENTS.md says why.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
 
 /// Nonzero taps on each side of the centre — the odd-indexed ones. The full kernel has
 /// `4 * HALF_TAPS + 1` taps.

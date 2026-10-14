@@ -14,7 +14,7 @@
 //!
 //! The A/D/R times are **not** smoothed. They set segment coefficients rather than being signals.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
 
 /// Level below which the envelope is considered finished and snaps to exactly zero.
 pub const ZERO_THRESHOLD: f32 = 1e-4; // -80 dB

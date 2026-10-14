@@ -48,7 +48,7 @@
 //! `Short` on two springs rather than three. Naming them after real tanks would claim a capture
 //! that does not exist.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
 
 const NYQUIST_FRACTION: f32 = 0.45;
 
@@ -120,8 +120,9 @@ impl AllPass {
 #[inline]
 fn allpass_coef(hz: f32, sample_rate: f32) -> f32 {
     let fc = hz.clamp(20.0, NYQUIST_FRACTION * sample_rate);
-    let t = crate::hpf::tan_approx(std::f64::consts::PI * f64::from(fc) / f64::from(sample_rate))
-        as f32;
+    let t =
+        mxm_dsp::shape::tan_approx(std::f64::consts::PI * f64::from(fc) / f64::from(sample_rate))
+            as f32;
     ((1.0 - t) / (1.0 + t)).clamp(-0.999, 0.999)
 }
 
@@ -148,8 +149,9 @@ impl OnePole {
 #[inline]
 fn onepole_g(hz: f32, sample_rate: f32) -> f32 {
     let fc = hz.clamp(10.0, NYQUIST_FRACTION * sample_rate);
-    let t = crate::hpf::tan_approx(std::f64::consts::PI * f64::from(fc) / f64::from(sample_rate))
-        as f32;
+    let t =
+        mxm_dsp::shape::tan_approx(std::f64::consts::PI * f64::from(fc) / f64::from(sample_rate))
+            as f32;
     t / (1.0 + t)
 }
 

@@ -687,10 +687,11 @@ the PolyBLEP residual and `clamp_pulse_width`, the ADSR's `ZERO_THRESHOLD`, `ATT
 manual's "near 8"), `EXCITATION_THRESHOLD` (the singing point itself), `EXCITATION_LEVEL`
 (−100 dB) and `K_MAX` — see *The resonance control sings from the same position*.
 
-## Dependencies: two at runtime, and they are why the floor holds
+## Dependencies: three at runtime, and they are why the floor holds
 
-**`mxm-modulation` and `mxm-rng`, and nothing else.** The routing conversion added the first and the
-shared generators the second (the architecture audit's O3); each has **zero dependencies of its
+**`mxm-modulation`, `mxm-rng` and `mxm-dsp`, and nothing else.** The routing conversion added the first,
+the shared generators the second (the architecture audit's O3) and the shared primitives the third
+(O1); each has **zero dependencies of its
 own** and sits at this same 1.87 floor, so the shipped graph still does not reach the 1.95 GUI
 floor. That is a claim checkable with `cargo tree -e normal,build -p mxm-mono-00-dsp`, and running it
 by hand is what keeps the split honest — nothing else would catch a GUI crate arriving through it.

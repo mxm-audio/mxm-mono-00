@@ -13,7 +13,8 @@
 //!
 //! **Phasors free-run.** They are never reset on note-on — a VCO does not do that either.
 
-use crate::flush;
+use mxm_dsp::blep::{clamp_pulse_width, poly_blep};
+use mxm_dsp::guard::flush;
 
 /// Lowest frequency the oscillator will produce. The hardware reaches 3 Hz at the bottom of the
 /// keyboard with the knob fully down (§5.1); below this the PolyBLEP correction is meaningless.
@@ -23,20 +24,6 @@ pub const FREQ_MIN_HZ: f32 = 4.0;
 /// sawtooth LFO on top can otherwise exceed Nyquist, and PolyBLEP does not make an invalid phase
 /// increment safe.
 pub const NYQUIST_FRACTION: f32 = 0.45;
-
-/// PolyBLEP residual for a step discontinuity, `t` the phase in `0..1`, `dt` the increment.
-#[inline]
-fn poly_blep(t: f32, dt: f32) -> f32 {
-    if t < dt {
-        let x = t / dt;
-        x + x - x * x - 1.0
-    } else if t > 1.0 - dt {
-        let x = (t - 1.0) / dt;
-        x * x + x + x + 1.0
-    } else {
-        0.0
-    }
-}
 
 /// A free-running phase accumulator.
 #[derive(Debug, Clone, Copy, Default)]
@@ -133,16 +120,6 @@ pub fn pulse(p: &Phasor, width: f32) -> f32 {
 #[inline]
 pub fn triangle(p: &Phasor) -> f32 {
     4.0 * (p.phase() - 0.5).abs() - 1.0
-}
-
-/// Keep the two PolyBLEP corrections from overlapping.
-///
-/// The hardware's 5 % SET trim pins the narrow end at 5 % (§5.3); the wide end is the square.
-#[inline]
-pub fn clamp_pulse_width(width: f32, dt: f32) -> f32 {
-    let lo = 0.05f32.max(2.0 * dt);
-    let hi = 0.95f32.min(1.0 - 2.0 * dt);
-    if lo > hi { 0.5 } else { width.clamp(lo, hi) }
 }
 
 /// The plug-out's three-position WAVEFORM switch (manual p. 16). Square and pulse-at-50 % are the

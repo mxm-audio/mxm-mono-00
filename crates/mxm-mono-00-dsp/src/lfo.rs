@@ -146,7 +146,8 @@ impl Lfo {
     #[inline]
     pub fn sine(&self) -> f32 {
         let tri = 2.0 * self.core_triangle() - 1.0; // -1..1
-        0.5 * crate::tanh_approx(SINE_SHAPER_DRIVE * tri) / crate::tanh_approx(SINE_SHAPER_DRIVE)
+        0.5 * mxm_dsp::shape::tanh_approx(SINE_SHAPER_DRIVE * tri)
+            / mxm_dsp::shape::tanh_approx(SINE_SHAPER_DRIVE)
     }
 
     /// Advance the core by one sample at `rate_hz` and return the switch's output, at the

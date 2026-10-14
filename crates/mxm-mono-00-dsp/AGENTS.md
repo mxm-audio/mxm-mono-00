@@ -146,9 +146,9 @@ red if somebody tidies them:
 
 - [NOTES.md § What is chosen](NOTES.md#what-is-chosen-not-measured) lists every chosen constant and
   those copied or re-argued from siblings. Keep it complete.
-- **`mxm-modulation` and `mxm-rng` are the runtime dependencies**, both dependency-free at the 1.87
-  floor; check by hand with `cargo tree -e normal,build -p mxm-mono-00-dsp` that no GUI crate
-  arrives. Every other edge is test-only and reaches no bundle ([NOTES.md § Dependencies](NOTES.md#dependencies-two-at-runtime-and-they-are-why-the-floor-holds)).
+- **`mxm-modulation`, `mxm-rng` and `mxm-dsp` are the runtime dependencies**, all dependency-free at
+  the 1.87 floor; check by hand with `cargo tree -e normal,build -p mxm-mono-00-dsp` that no GUI crate
+  arrives. Every other edge is test-only and reaches no bundle ([NOTES.md § Dependencies](NOTES.md#dependencies-three-at-runtime-and-they-are-why-the-floor-holds)).
 
 ## Everything else the collection's DSP already requires
 

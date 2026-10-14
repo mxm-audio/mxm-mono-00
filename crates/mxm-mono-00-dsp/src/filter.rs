@@ -23,7 +23,8 @@
 //! chosen amount labelled against that qualitative source. The mechanism on the hardware — the
 //! second gang of the resonance pot — is unverified (§13).
 
-use crate::{flush, tanh_approx};
+use mxm_dsp::guard::flush;
+use mxm_dsp::shape::tanh_approx;
 use mxm_rng::Xorshift32;
 use std::f32::consts::PI;
 

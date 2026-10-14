@@ -13,7 +13,7 @@
 //! reading of the pink network is a topology assumption stated in the table. The noise reaches
 //! the mixer and the NOISE OUT column *after* the switch, so what leaves is the coloured version.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
 use mxm_rng::Xorshift32;
 
 /// Derived: 1 / (2π · 100 kΩ · 470 pF).

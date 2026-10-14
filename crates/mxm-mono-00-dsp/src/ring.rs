@@ -16,7 +16,7 @@
 //! reference; whether that figure calls for oversampling is the plan's phase 1 question, and the
 //! answer recorded in the crate's AGENTS.md is *not yet*.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
 
 /// The product of two bounded inputs is bounded by their product; the VCOs are `|x| <= 1.5`
 /// (PolyBLEP overshoot), so this is the ring modulator's stated bound.

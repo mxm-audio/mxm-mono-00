@@ -35,7 +35,8 @@ use crate::ring::ring;
 use crate::routing::{self, Graph, Routing, source, target};
 use crate::sh::SampleHold;
 use crate::vca::Vca;
-use crate::{flush, tanh_approx};
+use mxm_dsp::guard::flush;
+use mxm_dsp::shape::tanh_approx;
 use mxm_modulation::standard;
 
 /// The retired VCO LFO slider's full scale: one ten-volt LFO unit at full slider was an octave of

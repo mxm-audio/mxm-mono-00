@@ -17,7 +17,7 @@
 //! plug-out invention with no hardware to defer to; it is modelled as a tilt about 1 kHz, chosen,
 //! and lives here because that is where the plug-out puts it.
 
-use crate::flush;
+use mxm_dsp::guard::flush;
 
 /// The tilt's pivot. **Chosen** — the plug-out documents no figure.
 pub const TONE_PIVOT_HZ: f32 = 1_000.0;
@@ -67,7 +67,7 @@ impl Vca {
             // validator's 1.2 kHz sample rate an unclamped 1 kHz pivot put the prewarp past the
             // approximation's range and the tilt returned NaN on its twenty-third sample.
             let pivot = TONE_PIVOT_HZ.min(crate::hpf::NYQUIST_FRACTION * sample_rate);
-            let g = crate::hpf::tan_approx(
+            let g = mxm_dsp::shape::tan_approx(
                 std::f64::consts::PI * f64::from(pivot) / f64::from(sample_rate),
             ) as f32;
             self.tilt_g = g / (1.0 + g);
