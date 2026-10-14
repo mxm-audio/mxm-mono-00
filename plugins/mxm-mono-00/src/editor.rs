@@ -35,7 +35,6 @@ use mxm_ui::space::{SPACE_3, SPACE_4};
 use mxm_ui::theme::Tokens;
 use nice_plug::context::gui::GuiContext;
 use nice_plug::prelude::*;
-use nice_plug_egui::{EguiEditorState, NiceEguiApp, create_egui_editor};
 
 use crate::params::MxmMono00Params;
 use crate::telemetry::Telemetry;
@@ -84,37 +83,21 @@ const PARAMETER_COLUMNS: [&[sections::Section]; 3] = [
 
 /// Builds the editor. Called from `Plugin::editor`.
 pub fn create(params: Arc<MxmMono00Params>, telemetry: Arc<Telemetry>) -> Option<MxmMono00Editor> {
-    let state = EguiEditorState::from_size(
-        nice_plug::editor::dpi::LogicalSize::new(REFERENCE.0, REFERENCE.1),
-        1.0,
-    );
-
-    create_egui_editor(
-        state,
-        nice_plug_egui::RepaintNotifier::new(),
-        nice_plug_egui::EguiNiceSettings {
-            title: crate::NAME.to_owned(),
-            // Native resizing reflows the cards; scaling remains the app bar's independent zoom.
-            resize_hint: ResizeHint {
-                size_constraints: nice_plug::editor::SizeConstraints::min_logical_size(
-                    nice_plug::editor::dpi::LogicalSize::new(MINIMUM.0 as f32, MINIMUM.1 as f32),
-                ),
-                ..ResizeHint::RESIZABLE
-            },
-            ..Default::default()
-        },
+    mxm_editor::create(
+        crate::NAME,
+        REFERENCE,
+        MINIMUM,
         MxmMono00App::new(params, telemetry),
     )
 }
 
 /// The editor type the plugin exposes.
-pub type MxmMono00Editor = nice_plug_egui::EguiEditor<MxmMono00App>;
+pub type MxmMono00Editor = mxm_editor::Editor<MxmMono00App>;
 
 /// The editor's own state: what the plugin does not own and the host does not need.
 pub struct MxmMono00App {
     params: Arc<MxmMono00Params>,
     telemetry: Arc<Telemetry>,
-    gui_context: Option<GuiContext>,
     view: usize,
     text_entry: HashMap<&'static str, Option<String>>,
     presets: PresetUi,
@@ -133,7 +116,6 @@ impl MxmMono00App {
         Self {
             params,
             telemetry,
-            gui_context: None,
             view: 0,
             text_entry: HashMap::new(),
             presets: PresetUi::new(params_for_presets.as_ref()),
@@ -142,22 +124,8 @@ impl MxmMono00App {
     }
 }
 
-impl NiceEguiApp for MxmMono00App {
-    fn build(
-        &mut self,
-        egui_ctx: egui::Context,
-        nice_gui_ctx: GuiContext,
-        _frame: &mut nice_plug_egui::Frame,
-    ) -> Result<(), nice_plug_egui::baseview::HandlerError> {
-        mxm_ui::shell::install(&egui_ctx);
-        self.gui_context = Some(nice_gui_ctx);
-        Ok(())
-    }
-
-    fn ui(&mut self, ui: &mut Ui, _frame: &mut nice_plug_egui::Frame) {
-        let Some(gui_context) = self.gui_context.clone() else {
-            return;
-        };
+impl mxm_editor::Panel for MxmMono00App {
+    fn ui(&mut self, ui: &mut Ui, gui_context: &GuiContext) {
         panel(
             ui,
             &self.params,
@@ -168,10 +136,6 @@ impl NiceEguiApp for MxmMono00App {
             &mut self.presets,
             &mut self.nav,
         );
-    }
-
-    fn editor_closed(&mut self) {
-        self.gui_context = None;
     }
 }
 
