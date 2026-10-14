@@ -782,7 +782,10 @@ pub const PITCH_TAPER: FloatRange = FloatRange::SymmetricalSkewed {
 /// Whether a route exists. **Configuration, not an amount**, so its default is the plug-out's own
 /// internal connection — the jack as it comes, which a player can pull out.
 fn present(target: &str, source: &str, wired: bool) -> BoolParam {
-    BoolParam::new(format!("{target} from {source} on"), wired)
+    BoolParam::new(
+        mxm_modulation_params::reading::presence_name(target, source),
+        wired,
+    )
 }
 
 impl TargetRoutes {
@@ -795,55 +798,155 @@ impl TargetRoutes {
         Self {
             target: index,
             key_on: present(t, n[0], wired(0)),
-            key: amount(index, 0, format!("{t} from {}", n[0])),
+            key: amount(
+                index,
+                0,
+                mxm_modulation_params::reading::amount_name(t, n[0]),
+            ),
             lfo1_on: present(t, n[1], wired(1)),
-            lfo1: amount(index, 1, format!("{t} from {}", n[1])),
+            lfo1: amount(
+                index,
+                1,
+                mxm_modulation_params::reading::amount_name(t, n[1]),
+            ),
             lfo2_on: present(t, n[2], wired(2)),
-            lfo2: amount(index, 2, format!("{t} from {}", n[2])),
+            lfo2: amount(
+                index,
+                2,
+                mxm_modulation_params::reading::amount_name(t, n[2]),
+            ),
             sh_on: present(t, n[3], wired(3)),
-            sh: amount(index, 3, format!("{t} from {}", n[3])),
+            sh: amount(
+                index,
+                3,
+                mxm_modulation_params::reading::amount_name(t, n[3]),
+            ),
             sh_clock_on: present(t, n[4], wired(4)),
-            sh_clock: amount(index, 4, format!("{t} from {}", n[4])),
+            sh_clock: amount(
+                index,
+                4,
+                mxm_modulation_params::reading::amount_name(t, n[4]),
+            ),
             vco1_on: present(t, n[5], wired(5)),
-            vco1: amount(index, 5, format!("{t} from {}", n[5])),
+            vco1: amount(
+                index,
+                5,
+                mxm_modulation_params::reading::amount_name(t, n[5]),
+            ),
             vco2_on: present(t, n[6], wired(6)),
-            vco2: amount(index, 6, format!("{t} from {}", n[6])),
+            vco2: amount(
+                index,
+                6,
+                mxm_modulation_params::reading::amount_name(t, n[6]),
+            ),
             vco1_sync_on: present(t, n[7], wired(7)),
-            vco1_sync: amount(index, 7, format!("{t} from {}", n[7])),
+            vco1_sync: amount(
+                index,
+                7,
+                mxm_modulation_params::reading::amount_name(t, n[7]),
+            ),
             vco2_sync_on: present(t, n[8], wired(8)),
-            vco2_sync: amount(index, 8, format!("{t} from {}", n[8])),
+            vco2_sync: amount(
+                index,
+                8,
+                mxm_modulation_params::reading::amount_name(t, n[8]),
+            ),
             ring_on: present(t, n[9], wired(9)),
-            ring: amount(index, 9, format!("{t} from {}", n[9])),
+            ring: amount(
+                index,
+                9,
+                mxm_modulation_params::reading::amount_name(t, n[9]),
+            ),
             noise_on: present(t, n[10], wired(10)),
-            noise: amount(index, 10, format!("{t} from {}", n[10])),
+            noise: amount(
+                index,
+                10,
+                mxm_modulation_params::reading::amount_name(t, n[10]),
+            ),
             mixer_on: present(t, n[11], wired(11)),
-            mixer: amount(index, 11, format!("{t} from {}", n[11])),
+            mixer: amount(
+                index,
+                11,
+                mxm_modulation_params::reading::amount_name(t, n[11]),
+            ),
             env1_on: present(t, n[12], wired(12)),
-            env1: amount(index, 12, format!("{t} from {}", n[12])),
+            env1: amount(
+                index,
+                12,
+                mxm_modulation_params::reading::amount_name(t, n[12]),
+            ),
             env2_on: present(t, n[13], wired(13)),
-            env2: amount(index, 13, format!("{t} from {}", n[13])),
+            env2: amount(
+                index,
+                13,
+                mxm_modulation_params::reading::amount_name(t, n[13]),
+            ),
             gate_on: present(t, n[14], wired(14)),
-            gate: amount(index, 14, format!("{t} from {}", n[14])),
+            gate: amount(
+                index,
+                14,
+                mxm_modulation_params::reading::amount_name(t, n[14]),
+            ),
             glide_on: present(t, n[15], wired(15)),
-            glide: amount(index, 15, format!("{t} from {}", n[15])),
+            glide: amount(
+                index,
+                15,
+                mxm_modulation_params::reading::amount_name(t, n[15]),
+            ),
             velocity_on: present(t, n[16], wired(16)),
-            velocity: amount(index, 16, format!("{t} from {}", n[16])),
+            velocity: amount(
+                index,
+                16,
+                mxm_modulation_params::reading::amount_name(t, n[16]),
+            ),
             wheel_on: present(t, n[17], wired(17)),
-            wheel: amount(index, 17, format!("{t} from {}", n[17])),
+            wheel: amount(
+                index,
+                17,
+                mxm_modulation_params::reading::amount_name(t, n[17]),
+            ),
             pressure_on: present(t, n[18], wired(18)),
-            pressure: amount(index, 18, format!("{t} from {}", n[18])),
+            pressure: amount(
+                index,
+                18,
+                mxm_modulation_params::reading::amount_name(t, n[18]),
+            ),
             bend_on: present(t, n[19], wired(19)),
-            bend: amount(index, 19, format!("{t} from {}", n[19])),
+            bend: amount(
+                index,
+                19,
+                mxm_modulation_params::reading::amount_name(t, n[19]),
+            ),
             lfo1_saw_on: present(t, n[20], wired(20)),
-            lfo1_saw: amount(index, 20, format!("{t} from {}", n[20])),
+            lfo1_saw: amount(
+                index,
+                20,
+                mxm_modulation_params::reading::amount_name(t, n[20]),
+            ),
             lfo1_reverse_saw_on: present(t, n[21], wired(21)),
-            lfo1_reverse_saw: amount(index, 21, format!("{t} from {}", n[21])),
+            lfo1_reverse_saw: amount(
+                index,
+                21,
+                mxm_modulation_params::reading::amount_name(t, n[21]),
+            ),
             lfo1_triangle_on: present(t, n[22], wired(22)),
-            lfo1_triangle: amount(index, 22, format!("{t} from {}", n[22])),
+            lfo1_triangle: amount(
+                index,
+                22,
+                mxm_modulation_params::reading::amount_name(t, n[22]),
+            ),
             lfo1_sine_on: present(t, n[23], wired(23)),
-            lfo1_sine: amount(index, 23, format!("{t} from {}", n[23])),
+            lfo1_sine: amount(
+                index,
+                23,
+                mxm_modulation_params::reading::amount_name(t, n[23]),
+            ),
             lfo2_triangle_on: present(t, n[24], wired(24)),
-            lfo2_triangle: amount(index, 24, format!("{t} from {}", n[24])),
+            lfo2_triangle: amount(
+                index,
+                24,
+                mxm_modulation_params::reading::amount_name(t, n[24]),
+            ),
         }
     }
 
