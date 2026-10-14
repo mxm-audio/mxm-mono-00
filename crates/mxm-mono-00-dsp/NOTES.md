@@ -718,7 +718,9 @@ the call site, because normalisation is this crate's judgement and not the encod
   of 2026-09-10 and on the evidence of this crate's `Columns` being the same object as two siblings'.
   The evidence row `plans/plan-mxm-mono-00.md` §7.2 names has since been spent: `flush`,
   `tanh_approx`, `tan_approx`, the PolyBLEP residual and the pulse clamp proved identical to
-  `mxm-poly-06-dsp`'s and are `mxm-dsp`'s (the audit's O1), the generator `mxm-rng`'s (O3). **What
+  `mxm-poly-06-dsp`'s and are `mxm-dsp`'s (the audit's O1), the generator `mxm-rng`'s (O3), and the
+  delay's, the springs' and the direct coupling's storage `mxm-dsp`'s `AgeLine` (O2, each proved
+  bit-identical to the ring it replaced; their interpolation and clamps stay here). **What
   stays copied:** the ADSR, identical in code to poly-06's but for `MIN_TIME_S` (this machine's
   0.4 ms) — the first candidate for a parametrised step — and the diode ladder, `mxm-mono-03-dsp`'s
   **with one configuration added**, its `tanh` now `mxm-dsp`'s: identical in equation, not in file.

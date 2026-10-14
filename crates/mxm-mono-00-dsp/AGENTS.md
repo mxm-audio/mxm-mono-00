@@ -162,8 +162,8 @@ states them — not restated.
 
 # Work Guidance
 
-- Extracted: the routing frame (`mxm-modulation`), the generator (`mxm-rng`) and the byte-identical
-  primitives (`mxm-dsp`). The ADSR (its 0.4 ms floor) and the ladder stay local copies
+- Extracted: the routing frame (`mxm-modulation`), the generator (`mxm-rng`), the byte-identical
+  primitives and the delay, spring and direct lines' storage (`mxm-dsp`). The ADSR (its 0.4 ms floor) and the ladder stay local copies
   ([NOTES.md § The fourth honest copy](NOTES.md#the-fourth-honest-copy-what-this-crate-owes-the-extraction-plan)).
 - What remains is the plugin's: its editor, and the fidelity gate's
   listening comparison, which no test here can stand in for.

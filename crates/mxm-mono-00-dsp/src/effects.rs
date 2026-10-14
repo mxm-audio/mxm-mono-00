@@ -48,6 +48,7 @@
 //! `Short` on two springs rather than three. Naming them after real tanks would claim a capture
 //! that does not exist.
 
+use mxm_dsp::delay::AgeLine;
 use mxm_dsp::guard::flush;
 
 const NYQUIST_FRACTION: f32 = 0.45;
@@ -321,13 +322,11 @@ const DEFAULT_RATE: f32 = 48_000.0;
 
 #[derive(Debug, Clone)]
 pub struct Delay {
-    line: Vec<f32>,
-    write: usize,
-    /// Samples written since the line was last emptied, saturating at its length. **Emptying is
-    /// this counter, not a clear**: a read further back than it returns zero, so the stale
-    /// contents are never touched — zeroing a line sized for 768 kHz on the sample the quiet
-    /// snap fires would be a million stores inside one `process` call (review round 3).
-    valid: usize,
+    /// The collection's `mxm_dsp::delay::AgeLine`. **Emptying is its written count, not a clear**:
+    /// a read further back than what was written since returns zero, so the stale contents are
+    /// never touched — zeroing a line sized for 768 kHz on the sample the quiet snap fires would be
+    /// a million stores inside one `process` call (review round 3).
+    line: AgeLine,
     read_delay: f32,
     damping: OnePole,
     quiet: Quiet,
@@ -344,9 +343,7 @@ impl Default for Delay {
 impl Delay {
     pub fn new() -> Self {
         let mut delay = Self {
-            line: Vec::new(),
-            write: 0,
-            valid: 0,
+            line: AgeLine::new(0),
             read_delay: 0.0,
             damping: OnePole::default(),
             quiet: Quiet::default(),
@@ -361,8 +358,8 @@ impl Delay {
     /// at another rate.
     pub fn set_sample_rate(&mut self, sample_rate: f32) {
         let needed = (DELAY_MAX_S * sample_rate).ceil() as usize + LINE_MARGIN;
-        if self.line.len() != needed {
-            self.line = vec![0.0; needed];
+        if self.line.capacity() != needed {
+            self.line = AgeLine::new(needed);
         }
         self.reset();
     }
@@ -376,8 +373,7 @@ impl Delay {
     /// pointer goes home too — `set_sample_rate` may have shrunk the line under it, and the first
     /// O(1) version left it pointing past the new end (found by clap-validator at 1234.57 Hz).
     fn clear(&mut self) {
-        self.valid = 0;
-        self.write = 0;
+        self.line.clear();
         self.damping.reset();
         self.quiet.reset();
         self.armed = false;
@@ -386,11 +382,7 @@ impl Delay {
     /// The sample `back` samples before the write point, or zero if it predates the last empty.
     #[inline]
     fn read_back(&self, back: usize) -> f32 {
-        if back > self.valid {
-            return 0.0;
-        }
-        let len = self.line.len();
-        self.line[(self.write + len - back) % len]
+        self.line.read(back)
     }
 
     /// Samples the loop needs to fall under [`SNAP_LEVEL`] from unity at `time_s`, plus the hold —
@@ -423,7 +415,7 @@ impl Delay {
         }
         self.armed = true;
         let target = (time_s.clamp(DELAY_MIN_S, DELAY_MAX_S) * sample_rate)
-            .min((self.line.len() - 4) as f32);
+            .min((self.line.capacity() - 4) as f32);
         if self.read_delay <= 0.0 {
             self.read_delay = target;
         } else {
@@ -440,10 +432,7 @@ impl Delay {
             .damping
             .lowpass(delayed, onepole_g(DELAY_DAMPING_HZ, sample_rate));
         let written = flush(x + damped * DELAY_FEEDBACK);
-        let len = self.line.len();
-        self.line[self.write] = written;
-        self.write = (self.write + 1) % len;
-        self.valid = (self.valid + 1).min(len);
+        self.line.push(written);
         // Quiet for a whole line length and the hold: every repeat still in flight has landed.
         if self.quiet.track(written, self.read_delay, sample_rate) {
             self.clear();
@@ -575,10 +564,8 @@ pub enum SpringWet {
 
 #[derive(Debug, Clone)]
 struct Spring {
-    line: Vec<f32>,
-    write: usize,
-    /// Samples written since the spring was last emptied — see `Delay::valid`.
-    valid: usize,
+    /// Emptied by its written count, as `Delay::line` is.
+    line: AgeLine,
     dispersion: [AllPass; MAX_DISPERSION_STAGES],
 }
 
@@ -588,17 +575,14 @@ impl Spring {
         // force would have to be reallocated when the tank changed, and that is `process`.
         let longest = LONGEST_TRANSIT_MS * 0.001 * sample_rate;
         Self {
-            line: vec![0.0; longest.ceil() as usize + LINE_MARGIN],
-            write: 0,
-            valid: 0,
+            line: AgeLine::new(longest.ceil() as usize + LINE_MARGIN),
             dispersion: [AllPass::default(); MAX_DISPERSION_STAGES],
         }
     }
 
     /// O(1): the line's contents are no longer valid to read.
     fn reset(&mut self) {
-        self.valid = 0;
-        self.write = 0;
+        self.line.clear();
         for a in &mut self.dispersion {
             a.reset();
         }
@@ -614,19 +598,12 @@ impl Spring {
         disp_a: f32,
         stages: usize,
     ) -> f32 {
-        let len = self.line.len();
-        let back = delay_samples.clamp(1, len - 1);
-        let mut r = if back > self.valid {
-            0.0
-        } else {
-            self.line[(self.write + len - back) % len]
-        };
+        let back = delay_samples.clamp(1, self.line.capacity() - 1);
+        let mut r = self.line.read(back);
         for a in &mut self.dispersion[..stages.min(MAX_DISPERSION_STAGES)] {
             r = a.process(r, disp_a);
         }
-        self.line[self.write] = flush(x + r * feedback);
-        self.write = (self.write + 1) % len;
-        self.valid = (self.valid + 1).min(len);
+        self.line.push(flush(x + r * feedback));
         r
     }
 }
@@ -638,10 +615,8 @@ pub struct SpringReverb {
     springs: [Spring; MAX_SPRINGS],
     band_low: OnePole,
     band_high: OnePole,
-    direct: Vec<f32>,
-    direct_write: usize,
-    /// Samples written to the direct line since it was last emptied — see `Delay::valid`.
-    direct_valid: usize,
+    /// The direct coupling's line, emptied by its written count as `Delay::line` is.
+    direct: AgeLine,
     quiet: Quiet,
     /// Whether the tank holds anything. **At zero level the tank is emptied, once**, rather than
     /// frozen: the first build returned dry and left the springs full, so raising the level ten
@@ -667,9 +642,7 @@ impl SpringReverb {
             ],
             band_low: OnePole::default(),
             band_high: OnePole::default(),
-            direct: Vec::new(),
-            direct_write: 0,
-            direct_valid: 0,
+            direct: AgeLine::new(0),
             quiet: Quiet::default(),
             armed: false,
         };
@@ -701,8 +674,8 @@ impl SpringReverb {
             Spring::new(sample_rate),
         ];
         let direct = (SPRING_DIRECT_MS * 0.001 * sample_rate).ceil() as usize + 16;
-        if self.direct.len() != direct {
-            self.direct = vec![0.0; direct];
+        if self.direct.capacity() != direct {
+            self.direct = AgeLine::new(direct);
         }
         self.reset();
     }
@@ -713,8 +686,7 @@ impl SpringReverb {
         }
         self.band_low.reset();
         self.band_high.reset();
-        self.direct_valid = 0;
-        self.direct_write = 0;
+        self.direct.clear();
         self.quiet.reset();
         self.armed = false;
     }
@@ -776,16 +748,10 @@ impl SpringReverb {
             .lowpass(x - low, onepole_g(tank.band_high_hz, sample_rate));
 
         // The direct coupling, a couple of milliseconds late.
-        let dlen = self.direct.len();
-        let d = ((SPRING_DIRECT_MS * 0.001 * sample_rate) as usize).clamp(1, dlen - 1);
-        let direct = if d > self.direct_valid {
-            0.0
-        } else {
-            self.direct[(self.direct_write + dlen - d) % dlen]
-        };
-        self.direct[self.direct_write] = band;
-        self.direct_write = (self.direct_write + 1) % dlen;
-        self.direct_valid = (self.direct_valid + 1).min(dlen);
+        let d = ((SPRING_DIRECT_MS * 0.001 * sample_rate) as usize)
+            .clamp(1, self.direct.capacity() - 1);
+        let direct = self.direct.read(d);
+        self.direct.push(band);
 
         let disp_a = allpass_coef(tank.dispersion_hz, sample_rate);
         // The input is split evenly between the springs, so a two-spring tank is no louder than a
@@ -1179,8 +1145,9 @@ mod tests {
         }
     }
 
-    /// **Review round 3.** Emptying a line touches no memory: what it held is simply not read.
-    /// A reset with stale contents behind it reads exact zeros for a whole line length.
+    /// **Review round 3.** Emptying a line touches no memory: what it held is simply not read
+    /// (`AgeLine::clear` resets its counters alone; mxm-dsp's own test holds that). A reset with
+    /// stale contents behind it reads exact zeros for a whole line length.
     #[test]
     fn an_emptied_line_reads_exact_zeros_without_being_zeroed() {
         let mut dl = Delay::new();
@@ -1188,14 +1155,10 @@ mod tests {
             dl.process((i as f32 * 0.37).sin(), 1.0, 0.5, FS);
         }
         assert!(
-            dl.line.iter().any(|v| *v != 0.0),
+            (1..=dl.line.written()).any(|age| dl.line.read(age) != 0.0),
             "the premise: the line is full"
         );
         dl.reset();
-        assert!(
-            dl.line.iter().any(|v| *v != 0.0),
-            "reset must not touch the line"
-        );
         for i in 0..(2 * FS as usize) {
             assert_eq!(
                 dl.process(0.0, 1.0, 0.5, FS),
