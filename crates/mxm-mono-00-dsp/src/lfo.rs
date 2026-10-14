@@ -20,7 +20,7 @@
 //! switch does not reach it (wart 5). The **rate** is 0.15–25 Hz on the slider (§3.1); the
 //! plug-out's rate CV row and OFFSET arrive as a rate multiplier the matrix will supply.
 
-use crate::Rng;
+use mxm_rng::Xorshift32;
 
 /// The slider's range (§3.1).
 pub const RATE_MIN_HZ: f32 = 0.15;
@@ -55,7 +55,7 @@ pub struct Lfo {
     /// The S&H shape's noise, one generator per LFO so the two step apart, and its seed for
     /// `reset`.
     seed: u32,
-    rng: Rng,
+    rng: Xorshift32,
     /// The level the S&H shape holds until the next cycle; none until it is first asked for.
     held: Option<f32>,
 }
@@ -79,7 +79,7 @@ impl Lfo {
             square_prev: true,
             rose: false,
             seed,
-            rng: Rng::new(seed),
+            rng: Xorshift32::new(seed),
             held: None,
         }
     }
@@ -167,7 +167,7 @@ impl Lfo {
             // The first ask takes a level at once, so switching to S&H never waits a cycle.
             Shape::SampleHold => *self
                 .held
-                .get_or_insert_with(|| 0.5 * self.rng.next_bipolar()),
+                .get_or_insert_with(|| 0.5 * self.rng.bipolar_f32()),
         };
 
         self.phase += rate_hz.clamp(RATE_MIN_HZ, RATE_MAX_HZ) / sample_rate;
@@ -175,7 +175,7 @@ impl Lfo {
             self.phase -= 1.0;
             // A new level once a cycle, at the LFO's own rate, whatever the shape: the noise runs
             // on, so switching to S&H finds the latest level.
-            self.held = Some(0.5 * self.rng.next_bipolar());
+            self.held = Some(0.5 * self.rng.bipolar_f32());
         }
         let square_now = self.phase < 0.5;
         self.rose = square_now && !self.square_prev;

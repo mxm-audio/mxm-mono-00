@@ -23,7 +23,8 @@
 //! chosen amount labelled against that qualitative source. The mechanism on the hardware — the
 //! second gang of the resonance pot — is unverified (§13).
 
-use crate::{Rng, flush, tanh_approx};
+use crate::{flush, tanh_approx};
+use mxm_rng::Xorshift32;
 use std::f32::consts::PI;
 
 /// Newton steps used to solve the resonance feedback each sample. Three is enough because the
@@ -216,7 +217,7 @@ pub struct DiodeLadder {
     config: DiodeConfig,
     s: [f32; 4],
     y_prev: f32,
-    rng: Rng,
+    rng: Xorshift32,
     /// `discrete_threshold / threshold` and the sung frequency ratio, tabulated over the log of
     /// the cutoff-to-sample-rate ratio from [`CORRECTION_RATIO_MIN`] to the configuration's
     /// clamp. Built once here, on no audio thread; read per sample by [`Self::lookup`].
@@ -243,7 +244,7 @@ impl DiodeLadder {
             config,
             s: [0.0; 4],
             y_prev: 0.0,
-            rng: Rng::new(0x5EED_0100),
+            rng: Xorshift32::new(0x5EED_0100),
             correction,
         }
     }
@@ -269,7 +270,7 @@ impl DiodeLadder {
     pub fn reset(&mut self) {
         self.s = [0.0; 4];
         self.y_prev = 0.0;
-        self.rng = Rng::new(0x5EED_0100);
+        self.rng = Xorshift32::new(0x5EED_0100);
     }
 
     /// Map a normalised resonance `0..=1` onto **this configuration's own** `k` at this cutoff, so
@@ -315,7 +316,7 @@ impl DiodeLadder {
 
         let mut u = input;
         if resonance > EXCITATION_THRESHOLD {
-            u += EXCITATION_LEVEL * self.rng.next_bipolar();
+            u += EXCITATION_LEVEL * self.rng.bipolar_f32();
         }
 
         // F(y) = A - P*k*tanh(y) - y = 0, P = G0*G1*G2*G3, A = P*u + S — one root, since F' <= -1.

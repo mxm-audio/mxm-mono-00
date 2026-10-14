@@ -13,7 +13,8 @@
 //! reading of the pink network is a topology assumption stated in the table. The noise reaches
 //! the mixer and the NOISE OUT column *after* the switch, so what leaves is the coloured version.
 
-use crate::{Rng, flush};
+use crate::flush;
+use mxm_rng::Xorshift32;
 
 /// Derived: 1 / (2π · 100 kΩ · 470 pF).
 pub const WHITE_HP_HZ: f32 = 3_386.0;
@@ -100,7 +101,7 @@ impl Section {
 
 #[derive(Debug, Clone)]
 pub struct Noise {
-    rng: Rng,
+    rng: Xorshift32,
     white: Section,
     pink1: Section,
     pink2: Section,
@@ -117,7 +118,7 @@ impl Noise {
 
     pub fn new(sample_rate: f32) -> Self {
         let mut n = Self {
-            rng: Rng::new(Self::SEED),
+            rng: Xorshift32::new(Self::SEED),
             white: Section::default(),
             pink1: Section::default(),
             pink2: Section::default(),
@@ -141,7 +142,7 @@ impl Noise {
     }
 
     pub fn reset(&mut self) {
-        self.rng = Rng::new(Self::SEED);
+        self.rng = Xorshift32::new(Self::SEED);
         self.white.reset();
         self.pink1.reset();
         self.pink2.reset();
@@ -150,7 +151,7 @@ impl Noise {
     /// One sample of the selected colour, bounded by the shaping's unity gain: `|y| <= 2`.
     #[inline]
     pub fn process(&mut self, colour: Colour) -> f32 {
-        let raw = self.rng.next_bipolar();
+        let raw = self.rng.bipolar_f32();
         // Both networks run so a switch mid-note does not click from an unsettled filter.
         let white = self.white.process(raw);
         let pink = self.pink2.process(self.pink1.process(raw));

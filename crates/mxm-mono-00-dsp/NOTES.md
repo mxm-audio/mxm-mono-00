@@ -680,17 +680,18 @@ to be listened to in the fidelity gate:
 | `oscillator.rs` | the triangle's seam | **not modelled** |
 | `noise.rs` | the pink network read as two -6 dB shelves | a topology assumption on the printed values, corners derived |
 
-Constants copied unchanged from the siblings and not re-argued: `flush`, `Rng`, `tanh_approx`,
+Constants copied unchanged from the siblings and not re-argued: `flush`, `tanh_approx`,
 the PolyBLEP residual and `clamp_pulse_width`, the ADSR's `ZERO_THRESHOLD`, `ATTACK_OVERSHOOT`,
 `ATTACK_TAUS` and `DECAY_TAUS`, the ladder's `NEWTON_ITERATIONS` and `NYQUIST_FRACTION`.
 `MIN_TIME_S` is the machine's 0.4 ms. **Re-argued from the copy:** `RESONANCE_MARGIN` (1.25, the
 manual's "near 8"), `EXCITATION_THRESHOLD` (the singing point itself), `EXCITATION_LEVEL`
 (−100 dB) and `K_MAX` — see *The resonance control sings from the same position*.
 
-## Dependencies: one at runtime, and it is why the floor holds
+## Dependencies: two at runtime, and they are why the floor holds
 
-**`mxm-modulation`, and nothing else.** The routing conversion added it; it has **zero dependencies
-of its own** and sits at this same 1.87 floor, so the shipped graph still does not reach the 1.95 GUI
+**`mxm-modulation` and `mxm-rng`, and nothing else.** The routing conversion added the first and the
+shared generators the second (the architecture audit's O3); each has **zero dependencies of its
+own** and sits at this same 1.87 floor, so the shipped graph still does not reach the 1.95 GUI
 floor. That is a claim checkable with `cargo tree -e normal,build -p mxm-mono-00-dsp`, and running it
 by hand is what keeps the split honest — nothing else would catch a GUI crate arriving through it.
 
@@ -716,8 +717,8 @@ the call site, because normalisation is this crate's judgement and not the encod
   of 2026-09-10 and on the evidence of this crate's `Columns` being the same object as two siblings'.
   Everything else here was copied whole and **is still not extracted from**. What
   this crate owes the extraction plan is the evidence row `plans/plan-mxm-mono-00.md` §7.2 names:
-  so far the ADSR, `flush`, `Rng`, `tanh_approx` and the PolyBLEP residual are **identical** to
-  `mxm-poly-06-dsp`'s; the diode ladder is `mxm-mono-03-dsp`'s **with one configuration added and
+  so far the ADSR, `flush`, `tanh_approx` and the PolyBLEP residual are **identical** to
+  `mxm-poly-06-dsp`'s (the generator they shared is `mxm-rng`'s, the audit's O3); the diode ladder is `mxm-mono-03-dsp`'s **with one configuration added and
   its `tanh` shared from `lib.rs`** — identical in equation, not in file.
 
 ## Verification: the rulers, the demo and the properties the tests keep

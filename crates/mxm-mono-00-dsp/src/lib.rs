@@ -3,9 +3,9 @@
 //! Deliberately free of any plugin-framework types: everything here takes plain values and a
 //! sample rate, so the whole instrument is testable with `cargo test` and no host involved.
 //!
-//! **The fourth honest copy.** `flush`, `Rng`, the PolyBLEP residual, the Padé approximants and
-//! the ADSR are copied whole from the sibling crates, as `plans/plan-mxm-mono-00.md` §7.2 says,
-//! and this crate depends on none of them. What it adds is the machine's: a triangle by switched
+//! **The fourth honest copy.** `flush`, the PolyBLEP residual, the Padé approximants and the ADSR
+//! are copied whole from the sibling crates, as `plans/plan-mxm-mono-00.md` §7.2 says, and this
+//! crate depends on none of them; its noise generator is `mxm-rng`'s `Xorshift32`. What it adds is the machine's: a triangle by switched
 //! inversion, coloured noise, an LFO whose shapes sit at three DC levels, a VCA whose tremolo can
 //! only dip, a portamento that is a hold capacitor, and a glide that is one RC on a gate edge.
 //!
@@ -51,32 +51,6 @@ pub fn flush(x: f32) -> f32 {
     if x.abs() < 1e-20 { 0.0 } else { x }
 }
 
-/// Small xorshift PRNG. Allocation-free, deterministic, seeded explicitly so every noise source
-/// is bit-repeatable — the export renders through a second instance, so this is load-bearing.
-#[derive(Debug, Clone)]
-pub struct Rng {
-    state: u32,
-}
-
-impl Rng {
-    pub const fn new(seed: u32) -> Self {
-        // A zero state is a fixed point for xorshift, so forbid it.
-        Self {
-            state: if seed == 0 { 0x9E37_79B9 } else { seed },
-        }
-    }
-
-    /// Next uniform sample in `[-1, 1)`.
-    #[inline]
-    pub fn next_bipolar(&mut self) -> f32 {
-        self.state ^= self.state << 13;
-        self.state ^= self.state >> 17;
-        self.state ^= self.state << 5;
-        // Map the top 24 bits into [-1, 1) so the result is exactly representable.
-        ((self.state >> 8) as f32 / 8_388_608.0) - 1.0
-    }
-}
-
 /// Bounded, monotonic `tanh` approximation — a [7/6] Padé form.
 ///
 /// The input clamp is load-bearing: without it the rational form diverges for large `x`, which
@@ -102,17 +76,6 @@ mod tests {
         assert_eq!(flush(-1e-30), 0.0);
         assert_eq!(flush(0.5), 0.5);
         assert_eq!(flush(-1e-6), -1e-6);
-    }
-
-    #[test]
-    fn rng_is_deterministic_and_bounded() {
-        let mut a = Rng::new(0x1234_5678);
-        let mut b = Rng::new(0x1234_5678);
-        for _ in 0..10_000 {
-            let x = a.next_bipolar();
-            assert_eq!(x, b.next_bipolar(), "same seed must give same sequence");
-            assert!((-1.0..1.0).contains(&x), "out of range: {x}");
-        }
     }
 
     #[test]
