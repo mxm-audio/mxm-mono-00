@@ -44,6 +44,13 @@ pub const NAME: &str = plugin_name!();
 /// of this directory cannot silently move the plugin's identity and orphan every saved project.
 pub const CLAP_ID: &str = concat!("dk.mxm.", plugin_name!());
 
+/// The permanent VST3 class ID, which a VST3 host keys every saved project on, as a CLAP host does
+/// on [`CLAP_ID`]: the CLAP id's hash (`mxm_plugin_test::formats::vst3_class_id`), written out,
+/// and held to it by `identity::the_vst3_class_id_is_the_clap_ids_hash`.
+pub const VST3_CLASS_ID: [u8; 16] = [
+    0x5c, 0x2f, 0x4f, 0x95, 0x6a, 0x76, 0x98, 0x70, 0x32, 0x9b, 0xbe, 0xed, 0x54, 0xf3, 0x7f, 0x2f,
+];
+
 // Public for `apps/mxm-layout-lab` (in the private archive since the split) on the
 // `dynamic-layout` branch: the lab draws these real cards outside a host. Nothing else about them
 // changes, and the shipped cdylib is unaffected.
@@ -692,17 +699,35 @@ impl ClapPlugin for MxmMono00 {
     ];
 }
 
+impl Vst3Plugin for MxmMono00 {
+    const VST3_CLASS_ID: [u8; 16] = VST3_CLASS_ID;
+    /// No `Mono` or `Stereo`: in VST3 each means *only* that layout, and this plays both.
+    const VST3_SUBCATEGORIES: &'static [Vst3SubCategory] =
+        &[Vst3SubCategory::Instrument, Vst3SubCategory::Synth];
+}
+
 nice_export_clap!(MxmMono00);
+nice_export_vst3!(MxmMono00);
 
 /// The plugin's name, checked where it escapes this crate.
 #[cfg(test)]
 mod identity {
-    use super::{CLAP_ID, NAME};
+    use super::{CLAP_ID, MxmMono00, NAME};
 
     /// The id is built from the name, so it cannot drift from it.
     #[test]
     fn the_id_is_the_name_under_the_project_domain() {
         assert_eq!(CLAP_ID, format!("dk.mxm.{NAME}"));
+    }
+
+    #[test]
+    fn the_vst3_class_id_is_the_clap_ids_hash() {
+        mxm_plugin_test::formats::the_vst3_class_id_is_the_clap_ids_hash::<MxmMono00>();
+    }
+
+    #[test]
+    fn the_vst3_categories_follow_the_clap_features() {
+        mxm_plugin_test::formats::the_vst3_categories_follow_the_clap_features::<MxmMono00>();
     }
 
     /// `bundler.toml` names the same instrument this crate does — the one place the plugin's name

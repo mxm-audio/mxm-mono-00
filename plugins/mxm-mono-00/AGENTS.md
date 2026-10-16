@@ -24,6 +24,7 @@ rules, the editor contract — live in the parent and are not restated here. Thi
 | What | Value |
 |---|---|
 | `CLAP_ID` | `dk.mxm.mxm-mono-00` — assembled from `plugin_name!` in `src/lib.rs`, **not** from `CARGO_PKG_NAME` |
+| `VST3_CLASS_ID` | `VST3_CLASS_ID` in `src/lib.rs`, the CLAP id's hash written out; the first MXM VST3 (2026-10-16), loaded in newDAWn and Bitwig under it |
 | Parameter `#[id]`s | **Voice:** `priority` `tune` `bendrange` `portamento` `volume`<br>**VCO-1:** `range1` `coarse1` `fine1` `wave1` `pw1`<br>**VCO-2:** `range2` `coarse2` `fine2` `wave2` `pw2` `syncstrength`<br>**Mixer:** `vco1level` `vco2level` `noiselevel` `ringmodlevel` `noisecolour`<br>**Filter:** `hpf` `cutoff` `resonance`<br>**Amplifier:** `initialgain` `tone`<br>**Envelopes:** `vcfattack` `vcfdecay` `vcfsustain` `vcfrelease` `vcftrigger` and `vca…` likewise<br>**Modulators:** `lfo1rate` `lfo1shape` `lfo1offset` `lfo1sync` and `lfo2…` likewise<br>**S&H:** `shrate` `shlag` `shsync`<br>**FX:** `phaser` `delay` `delaytime` `temposync` `reverb`<br>**Routing:** 433 offered pairs of 450, `<target>_<source>` and `<target>_<source>on`, from eighteen `#[nested(id_prefix = …)]` groups whose `Params` impl is written by hand to leave the seventeen refused pairs out — the table is [`src/routes.rs`](src/routes.rs)'s `ROUTE_IDS` |
 
 - The ids and their count are public interface. `every_parameter_has_a_distinct_id`,
