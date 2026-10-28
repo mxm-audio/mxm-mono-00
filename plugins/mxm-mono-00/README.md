@@ -54,7 +54,7 @@ thirty-second note up to two beats — and is inert until a tempo arrives.
 Fifty factory sounds, the first twenty one per mechanism: two saws, a fifth, strong and weak sync,
 the bell, cross-modulation, pink and white noise, a squelch, the sample-and-hold patches, a
 self-running one, a drone, and one each for the three effects. They are files installed with the
-plugin, beside the `.clap` and inside the `.vst3`, and any CLAP host lists and loads them too.
+plugin, in its version's folder under the local data directory, and any CLAP host lists and loads them too.
 **Init is not a file**: it is generated from the parameter defaults, so it cannot be deleted and
 cannot drift from them.
 Your own presets are saved as readable JSON under the platform config directory.
